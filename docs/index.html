@@ -14,10 +14,24 @@
     window.$docsify = {
       name: 'MushroomDAO',
       repo: 'https://github.com/MushroomDAO/mushroom.github.io',
-      coverpage: true
+      loadSidebar: true,
+      subMaxLevel: 2,
+      loadNavbar: true,
+      coverpage: '.website/_coverpage.md',
+    // complete configuration parameters
+      search: {
+        maxAge: 86400000, // Expiration time, the default one day
+        paths: 'auto', // or 'auto'
+        placeholder: 'Type to search',
+        noData: 'No Results!',
+        depth: 2,
+        hideOtherSidebarContent: false,
+      },
     }
   </script>
   <!-- Docsify v4 -->
   <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
+  <script src="./.website/fontsize.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
 </body>
 </html>
