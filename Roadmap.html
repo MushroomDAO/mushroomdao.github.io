@@ -1,473 +1,249 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Roadmap - Mycelium Protocol</title>
+    <title>Project Roadmap</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700&display=swap');
-
-        :root {
-            --primary-color: #007bff;
-            --secondary-color: #6c757d;
-            --background-color: #f8f9fa;
-            --text-color: #343a40;
-            --card-bg: #ffffff;
-            --border-color: #e9ecef;
-            --timeline-color: #dee2e6;
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
         body {
-            font-family: 'Inter', 'Noto Sans SC', sans-serif;
-            background-color: var(--background-color);
-            color: var(--text-color);
-            line-height: 1.7;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #212529;
+            line-height: 1.6;
             margin: 0;
-            padding: 40px 20px;
+            padding: 2rem;
+            display: flex;
+            justify-content: center;
         }
 
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
+       .container {
+            max-width: 800px;
+            width: 100%;
         }
 
-        .header {
-            text-align: center;
-            margin-bottom: 50px;
+       .lang-switcher {
+            text-align: right;
+            margin-bottom: 2rem;
         }
 
-        .header h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-
-        .header p {
-            font-size: 1.1rem;
-            color: var(--secondary-color);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        .lang-switcher {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .lang-switcher button {
+       .lang-switcher button {
             background: none;
-            border: 1px solid var(--border-color);
-            padding: 8px 16px;
-            margin: 0 5px;
+            border: none;
+            color: #6c757d;
             cursor: pointer;
-            border-radius: 20px;
-            font-size: 14px;
-            transition: all 0.3s ease;
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 0.5rem;
+            margin-left: 0.5rem;
         }
 
-        .lang-switcher button.active {
-            background-color: var(--primary-color);
-            color: white;
-            border-color: var(--primary-color);
+       .lang-switcher button.active {
+            color: #007bff;
+            border-bottom: 2px solid #007bff;
         }
 
-        .roadmap-timeline {
-            position: relative;
-            padding: 20px 0;
-        }
-
-        .roadmap-timeline::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 15px;
-            height: 100%;
-            width: 3px;
-            background-color: var(--timeline-color);
-        }
-
-        .milestone {
-            position: relative;
-            margin-left: 50px;
-            margin-bottom: 50px;
-            padding: 25px;
-            background-color: var(--card-bg);
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-        }
-
-        .milestone::before {
-            content: '';
-            position: absolute;
-            top: 30px;
-            left: -44px;
-            height: 18px;
-            width: 18px;
-            background-color: var(--card-bg);
-            border: 3px solid var(--primary-color);
-            border-radius: 50%;
-            z-index: 1;
-        }
-
-        .milestone-header {
-            margin-bottom: 20px;
-        }
-
-        .milestone-phase {
-            font-size: 0.9rem;
+        h2 {
+            font-size: 2rem;
             font-weight: 700;
-            color: var(--primary-color);
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            border-bottom: 1px solid #dee2e6;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
         }
 
-        .milestone-title {
-            font-size: 1.8rem;
+        p.intro {
+            font-size: 1.1rem;
+            color: #495057;
+            margin-bottom: 3rem;
+        }
+
+       .phase {
+            margin-bottom: 3rem;
+            padding-left: 1.5rem;
+            border-left: 3px solid #e9ecef;
+        }
+
+       .phase-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 1rem;
+        }
+
+       .phase h3 {
+            font-size: 1.5rem;
             font-weight: 700;
-            margin: 5px 0;
+            margin: 0;
         }
 
-        .milestone-date {
+       .phase code {
+            font-family: "SF Mono", "Fira Code", "Fira Mono", "Roboto Mono", monospace;
+            background-color: #e9ecef;
+            color: #495057;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
             font-size: 0.9rem;
-            color: var(--secondary-color);
+        }
+
+       .phase p {
+            margin: 0.5rem 0;
+            color: #343a40;
+        }
+
+       .phase.logic {
+            background-color: #f1f3f5;
+            border: 1px solid #dee2e6;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-top: 1rem;
+        }
+
+       .phase.logic p {
+            margin: 0;
         }
         
-        .milestone-content h4 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin-top: 20px;
-            margin-bottom: 10px;
-            padding-bottom: 5px;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .milestone-content ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .milestone-content li {
-            margin-bottom: 10px;
-            padding-left: 20px;
-            position: relative;
-        }
-
-        .milestone-content li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: var(--primary-color);
-            font-weight: 700;
-        }
-
-        .en-content, .cn-content {
-            display: none;
-        }
-
-        .en-content.active, .cn-content.active {
-            display: block;
+       .phase.logic strong {
+            color: #0056b3;
         }
 
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div id="en" class="en-content">
-            <div class="header">
-                <h1>Mycelium Protocol Roadmap</h1>
-                <p>A pragmatic, phased approach to building the future of travel finance, focusing on de-risking and delivering tangible value at every step.</p>
+<div class="container">
+    <div class="lang-switcher">
+        <button id="lang-en" class="active" onclick="switchLang('en')">English</button>
+        <button id="lang-zh" onclick="switchLang('zh')">中文</button>
+    </div>
+
+    <div id="en" class="content">
+        <h2>Project Roadmap: A Four-Step Validation Plan</h2>
+        <p class="intro">Our goal is to systematically de-risk our venture by validating technology, feasibility, legitimacy, and commercial viability in sequential phases. Each step builds upon the last, ensuring a solid foundation before scaling.</p>
+
+        <div class="phase">
+            <div class="phase-header">
+                <h3>Phase 1: Prototype Validation</h3>
+                <code>Timeline: Quarter 1</code>
+            </div>
+            <p><strong>🎯 Goal:</strong> To prove, at minimal cost, that we can build a technically sound and desirable product.</p>
+            <p><strong>✅ Key Outputs & Metrics:</strong> An interactive mobile demo, a technical whitepaper, and approval from technical advisors.</p>
+            <div class="logic">
+                <p><strong>🧠 Strategic Logic:</strong> This is the foundation. Before engaging external partners, we must have tangible assets that prove our technical competence. This phase answers the question: <strong>"Can we build it?"</strong> The outputs are the essential tools needed to start conversations in Phase 2.</p>
             </div>
         </div>
-        <div id="cn" class="cn-content">
-            <div class="header">
-                <h1>Mycelium协议 战略路线图</h1>
-                <p>我们采用务实、分阶段的方式构建旅游金融的未来，聚焦于在每个步骤中消除风险并交付可验证的价值。</p>
+
+        <div class="phase">
+            <div class="phase-header">
+                <h3>Phase 2: Feasibility Validation</h3>
+                <code>Timeline: Quarter 2</code>
+            </div>
+            <p><strong>🎯 Goal:</strong> To prove the model works in a controlled, real-world environment and gain our first credible local endorsement.</p>
+            <p><strong>✅ Key Outputs & Metrics:</strong> A <em>CMU Sandbox Test Report</em> (with metrics like >99.5% transaction success, >50 NPS) and a signed Memorandum of Understanding (MOU) with Chiang Mai University.</p>
+            <div class="logic">
+                <p><strong>🧠 Strategic Logic:</strong> This moves our project from a concept to a proven solution in a "lab" environment. The data provides evidence, while the CMU partnership provides critical local credibility. This answers the question: <strong>"Does it work here?"</strong> This credibility is non-negotiable for successfully approaching the conservative financial institutions in Phase 3.</p>
             </div>
         </div>
 
-        <div class="lang-switcher">
-            <button id="btn-cn" class="active" onclick="switchLang('cn')">中文</button>
-            <button id="btn-en" onclick="switchLang('en')">English</button>
+        <div class="phase">
+            <div class="phase-header">
+                <h3>Phase 3: Legitimacy Validation</h3>
+                <code>Timeline: Quarter 3</code>
+            </div>
+            <p><strong>🎯 Goal:</strong> To secure the official regulatory and commercial "licenses to operate" from key ecosystem players.</p>
+            <p><strong>✅ Key Outputs & Metrics:</strong> An approval letter for the Bank of Thailand (BOT) "Regulatory Sandbox" and a signed commercial partnership agreement with a leading bank (e.g., SCB).</p>
+            <div class="logic">
+                <p><strong>🧠 Strategic Logic:</strong> This is the most critical de-risking phase. Without regulatory approval and a banking partner, we cannot legally operate. The success of Phase 2 is the key that unlocks these high-stakes negotiations. This phase answers the question: <strong>"Is it legal and supported?"</strong></p>
+            </div>
         </div>
 
-        <div class="roadmap-timeline">
-            <div class="milestone">
-                <div class="en-content">
-                    <div class="milestone-header">
-                        <div class="milestone-phase">Phase 0</div>
-                        <h2 class="milestone-title">Forging the Spear</h2>
-                        <div class="milestone-date">Current - Q4 2025</div>
-                    </div>
-                    <div class="milestone-content">
-                        <h4>Core Objective:</h4>
-                        <ul>
-                            <li>Transform the project concept into a highly executable cooperation plan that gains "principal approval" from key stakeholders.</li>
-                        </ul>
-                        <h4>Key Deliverables:</h4>
-                        <ul>
-                            <li>A comprehensive "Chiang Mai Pilot Compliance & Business White Paper" tailored for banks and government officials.</li>
-                            <li>A clear "Compliance Roadmap" designed within the current legal framework.</li>
-                            <li>A functional, simplified MVP web demo for presentation.</li>
-                            <li>(Goal) A Letter of Intent (LOI) from CMU or a key partner showing interest in the next phase.</li>
-                        </ul>
-                        <h4>Absolute Priority (The ONE Thing):</h4>
-                        <ul>
-                            <li>Finalize the "Compliance & Lobbying Package." This document is the single most critical asset for convincing the first external partners.</li>
-                        </ul>
-                        <h4>Team & Resources:</h4>
-                        <ul>
-                            <li>The two core members lead strategy and document creation.</li>
-                            <li>Student and part-time members support research and MVP prototype development.</li>
-                        </ul>
-                    </div>
-                </div>
-                 <div class="cn-content">
-                    <div class="milestone-header">
-                        <div class="milestone-phase">阶段 0</div>
-                        <h2 class="milestone-title">铸矛</h2>
-                        <div class="milestone-date">当前 - 2025年 Q4</div>
-                    </div>
-                    <div class="milestone-content">
-                        <h4>核心目标:</h4>
-                        <ul>
-                            <li>将项目构想转化为一份获得关键角色“原则性认可”的、高度可执行的合作方案。</li>
-                        </ul>
-                        <h4>关键成果:</h4>
-                        <ul>
-                            <li>完成一份面向银行法务和政府官员的《清迈试点合规与商业白皮书》。</li>
-                            <li>制定一份在现有法律框架下的、清晰的《合规路径图》。</li>
-                            <li>一个可交互的、用于演示的MVP网页版Demo。</li>
-                            <li>(理想目标) 获得一份来自清迈大学或关键伙伴的合作意向书(LOI)。</li>
-                        </ul>
-                        <h4>绝对优先级:</h4>
-                        <ul>
-                            <li>完成“合规与游说方案包”。这份文件是说服第一个外部伙伴的最关键资产。</li>
-                        </ul>
-                        <h4>团队与资源:</h4>
-                        <ul>
-                            <li>两位核心成员主导战略和白皮书撰写。</li>
-                            <li>学生和兼职成员支持资料搜集和MVP原型开发。</li>
-                        </ul>
-                    </div>
-                </div>
+        <div class="phase">
+            <div class="phase-header">
+                <h3>Phase 4: Commercial Validation</h3>
+                <code>Timeline: Quarter 4</code>
             </div>
-
-            <div class="milestone">
-                <div class="en-content">
-                    <div class="milestone-header">
-                        <div class="milestone-phase">Phase 1</div>
-                        <h2 class="milestone-title">The Proving Ground</h2>
-                        <div class="milestone-date">Q1 - Q2 2026</div>
-                    </div>
-                    <div class="milestone-content">
-                        <h4>Core Objective:</h4>
-                        <ul>
-                            <li>To obtain irrefutable data in a controlled, "zero-risk" environment (Chiang Mai University) that proves the product is viable and the user experience is effective.</li>
-                        </ul>
-                        <h4>Key Deliverables:</h4>
-                        <ul>
-                            <li>A functional MVP for internal testing.</li>
-                            <li>A closed-loop campus ecosystem with 50-100 student/faculty users and 2-3 partner merchants.</li>
-                            <li>A comprehensive "CMU Sandbox Data Report" detailing user funnels, transaction success rates, and qualitative feedback.</li>
-                        </ul>
-                        <h4>Absolute Priority (The ONE Thing):</h4>
-                        <ul>
-                            <li>The CMU Sandbox Experiment & Report. This report is the sole passport to walk out of the campus and into the boardrooms of banks and government offices.</li>
-                        </ul>
-                        <h4>Team & Resources:</h4>
-                        <ul>
-                            <li>Core team manages the experiment and analyzes data.</li>
-                            <li>Student members are key for recruiting testers and onboarding merchants.</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="cn-content">
-                    <div class="milestone-header">
-                        <div class="milestone-phase">阶段 1</div>
-                        <h2 class="milestone-title">练兵</h2>
-                        <div class="milestone-date">2026年 Q1 - Q2</div>
-                    </div>
-                    <div class="milestone-content">
-                        <h4>核心目标:</h4>
-                        <ul>
-                            <li>在一个完全可控的“无风险”环境（清迈大学）中，用最小代价获取第一份“不可辩驳的数据”，证明产品可行且体验有效。</li>
-                        </ul>
-                        <h4>关键成果:</h4>
-                        <ul>
-                            <li>一个功能性的、用于内部测试的MVP。</li>
-                            <li>一个包含50-100名师生用户和2-3家合作商家的封闭校园生态。</li>
-                            <li>一份详尽的《CMU校园沙盒实验数据报告》，包含用户漏斗、交易成功率和定性反馈。</li>
-                        </ul>
-                        <h4>绝对优先级:</h4>
-                        <ul>
-                            <li>完成校园沙盒实验并产出数据报告。这份报告是走出校园、进入银行和政府会议室的唯一通行证。</li>
-                        </ul>
-                        <h4>团队与资源:</h4>
-                        <ul>
-                            <li>核心团队负责实验管理和数据分析。</li>
-                            <li>学生成员是招募测试者和培训商家的关键执行力量。</li>
-                        </ul>
-                    </div>
-                </div>
+            <p><strong>🎯 Goal:</strong> To prove product-market fit and demonstrate a profitable, sustainable business model with real users.</p>
+            <p><strong>✅ Key Outputs & Metrics:</strong> Acquisition of the first 1,000 active users, first transaction revenue, and a data-backed model proving LTV > CAC (target ratio > 3:1).</p>
+            <div class="logic">
+                <p><strong>🧠 Strategic Logic:</strong> With legal and technical hurdles cleared, this final step proves the business makes financial sense. It confirms that real users want our product and that we can acquire them profitably. This answers the ultimate question: <strong>"Is this a real business?"</strong> Success here provides the definitive green light for expansion.</p>
             </div>
-            
-            <div class="milestone">
-                <div class="en-content">
-                    <div class="milestone-header">
-                        <div class="milestone-phase">Phase 2</div>
-                        <h2 class="milestone-title">Securing the Beachhead</h2>
-                        <div class="milestone-date">Q3 2026 - Q2 2027</div>
-                    </div>
-                    <div class="milestone-content">
-                        <h4>Core Objective:</h4>
-                        <ul>
-                            <li>To conquer the most critical fortress: securing a partnership agreement with a bank (e.g., SCB) and obtaining a "Regulatory Sandbox" permit.</li>
-                        </ul>
-                        <h4>Key Deliverables:</h4>
-                        <ul>
-                            <li>An official "Regulatory Sandbox" approval from the Bank of Thailand or relevant authorities.</li>
-                            <li>A formal technical integration with SCB Bank.</li>
-                            <li>The public launch of the official DApp with real asset conversion capabilities.</li>
-                            <li>Achieve the first 1,000+ real users and 100+ partner merchants.</li>
-                            <li>Generate the first protocol revenue, validating the 1.5% fee model.</li>
-                        </ul>
-                        <h4>Absolute Priority (The ONE Thing):</h4>
-                        <ul>
-                            <li>Sign a "Tripartite Cooperation Agreement" (Bank, Government Body, Mycelium) and receive the "Sandbox Permit." This is the project's D-Day.</li>
-                        </ul>
-                        <h4>Team & Resources:</h4>
-                        <ul>
-                            <li>Core members focus entirely on high-level negotiation and partnership management.</li>
-                            <li>Technical team's primary role is to support the bank's due diligence and integration process.</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="cn-content">
-                    <div class="milestone-header">
-                        <div class="milestone-phase">阶段 2</div>
-                        <h2 class="milestone-title">抢滩</h2>
-                        <div class="milestone-date">2026年 Q3 - 2027年 Q2</div>
-                    </div>
-                    <div class="milestone-content">
-                        <h4>核心目标:</h4>
-                        <ul>
-                            <li>攻克整个战役中最重要的碉堡：获得泰国银行（SCB）的合作协议和政府监管机构的“沙盒”许可。</li>
-                        </ul>
-                        <h4>关键成果:</h4>
-                        <ul>
-                            <li>获得泰国银行或相关部门的官方“监管沙盒”许可。</li>
-                            <li>完成与SCB银行的正式技术对接。</li>
-                            <li>发布包含真实资产兑换功能的正式版DApp。</li>
-                            <li>获取首批1000+真实用户和100+合作商家。</li>
-                            <li>产生第一笔协议收入，验证1.5%手续费分成模型。</li>
-                        </ul>
-                        <h4>绝对优先级:</h4>
-                        <ul>
-                            <li>签署“三方合作协议”（银行、政府机构、Mycelium）并获得“沙盒许可”。这是项目的诺曼底登陆日。</li>
-                        </ul>
-                        <h4>团队与资源:</h4>
-                        <ul>
-                            <li>核心成员100%投入到高层沟通和谈判中。</li>
-                            <li>技术团队的主要角色是支持银行的技术尽职调查和集成工作。</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class="milestone">
-                 <div class="en-content">
-                    <div class="milestone-header">
-                        <div class="milestone-phase">Phase 3</div>
-                        <h2 class="milestone-title">Igniting the Network</h2>
-                        <div class="milestone-date">Q3 2027 Onwards</div>
-                    </div>
-                    <div class="milestone-content">
-                        <h4>Core Objective:</h4>
-                        <ul>
-                            <li>To validate the scalability and profitability of the business model in the Chiang Mai market, and to codify this success into a replicable playbook.</li>
-                        </ul>
-                        <h4>Key Deliverables:</h4>
-                        <ul>
-                            <li>Achieve stable growth and Product-Market Fit in Chiang Mai.</li>
-                            <li>Publish the "City Launch Toolkit" V1.0, including technical, legal, and commercial templates.</li>
-                            <li>Initiate the replication process by signing an MOU for a second pilot city (e.g., Bali, Lisbon).</li>
-                            <li>(Post-validation) Conduct the Token Generation Event (TGE) for the $MYC governance token.</li>
-                        </ul>
-                        <h4>Absolute Priority (The ONE Thing):</h4>
-                        <ul>
-                            <li>Achieve positive unit economics in Chiang Mai and complete the "City Launch Toolkit." Perfect the recipe before opening the next franchise.</li>
-                        </ul>
-                        <h4>Team & Resources:</h4>
-                        <ul>
-                            <li>Team expansion begins here: hire the first full-time "Chiang Mai City Manager."</li>
-                            <li>Core team shifts focus to strategy, fundraising, and global expansion.</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="cn-content">
-                    <div class="milestone-header">
-                        <div class="milestone-phase">阶段 3</div>
-                        <h2 class="milestone-title">燎原</h2>
-                        <div class="milestone-date">2027年 Q3 及以后</div>
-                    </div>
-                    <div class="milestone-content">
-                        <h4>核心目标:</h4>
-                        <ul>
-                            <li>在清迈市场验证商业模式的规模化和盈利能力，并将成功经验“产品化”，形成可复制的行动手册。</li>
-                        </ul>
-                        <h4>关键成果:</h4>
-                        <ul>
-                            <li>在清迈市场实现稳定增长和产品-市场契合（Product-Market Fit）。</li>
-                            <li>发布《城市启动工具包V1.0》，包含技术、法律和商业模板。</li>
-                            <li>签署第二个试点城市的合作备忘录（MOU），启动复制流程。</li>
-                            <li>（在模式被充分验证后）进行$MYC治理代币的生成活动（TGE）。</li>
-                        </ul>
-                        <h4>绝对优先级:</h4>
-                        <ul>
-                            <li>在清迈实现正向的单位经济效益，并完成“城市启动工具包”。在开下一家“分店”前，先把“配方”完善到极致。</li>
-                        </ul>
-                        <h4>团队与资源:</h4>
-                        <ul>
-                            <li>团队扩张：招聘第一位全职的“清迈城市经理”。</li>
-                            <li>核心团队转向战略、融资和全球扩张。</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
         </div>
     </div>
 
-    <script>
-        function switchLang(lang) {
-            const enContents = document.querySelectorAll('.en-content');
-            const cnContents = document.querySelectorAll('.cn-content');
-            const btnEn = document.getElementById('btn-en');
-            const btnCn = document.getElementById('btn-cn');
+    <div id="zh" class="content" style="display:none;">
+        <h2>项目路线图：四步验证计划</h2>
+        <p class="intro">我们的目标是通过分阶段验证技术、可行性、合法性和商业模式，系统性地消除项目风险。每一步都建立在上一阶段成功的基础之上，确保在扩张前拥有坚实的基础。</p>
 
-            if (lang === 'en') {
-                document.documentElement.lang = 'en';
-                enContents.forEach(el => el.classList.add('active'));
-                cnContents.forEach(el => el.classList.remove('active'));
-                btnEn.classList.add('active');
-                btnCn.classList.remove('active');
-            } else {
-                document.documentElement.lang = 'zh-CN';
-                cnContents.forEach(el => el.classList.add('active'));
-                enContents.forEach(el => el.classList.remove('active'));
-                btnCn.classList.add('active');
-                btnEn.classList.remove('active');
-            }
+        <div class="phase">
+            <div class="phase-header">
+                <h3>第一阶段：原型验证</h3>
+                <code>时间线：第一季度</code>
+            </div>
+            <p><strong>🎯 目标：</strong> 以最低成本证明我们有能力打造出一款技术可靠且用户体验卓越的产品。</p>
+            <p><strong>✅ 关键产出与衡量标准：</strong> 一个可交互的移动端Demo，一份技术白皮书，并获得技术顾问认可。</p>
+            <div class="logic">
+                <p><strong>🧠 关键逻辑：</strong> 这是根基。在与外部伙伴接洽前，我们必须拥有能证明自身技术实力、清晰阐述愿景的有形资产。此阶段回答核心问题：<strong>“我们能做出来吗？”</strong> 其产出是开启第二阶段对话的必备工具。</p>
+            </div>
+        </div>
+
+        <div class="phase">
+            <div class="phase-header">
+                <h3>第二阶段：可行性验证</h3>
+                <code>时间线：第二季度</code>
+            </div>
+            <p><strong>🎯 目标：</strong> 证明我们的模式能在受控的真实环境中运行，并获得第一个来自本地权威机构的认可。</p>
+            <p><strong>✅ 关键产出与衡量标准：</strong> 一份《清迈大学沙盒测试报告》（指标如 >99.5%交易成功率，>50净推荐值），以及一份与清迈大学（CMU）正式签署的合作备忘录（MOU）。</p>
+            <div class="logic">
+                <p><strong>🧠 关键逻辑：</strong> 此步骤将项目从“概念”推向在“实验室”环境中被验证的解决方案。数据报告提供了具体的性能证据，而与清迈大学的合作则给予了至关重要的本地信誉背书。此阶段回答核心问题：<strong>“这个模式在这里行得通吗？”</strong> 这份信誉背书是第三阶段与保守的金融机构成功对话的先决条件。</p>
+            </div>
+        </div>
+
+        <div class="phase">
+            <div class="phase-header">
+                <h3>第三阶段：合法性验证</h3>
+                <code>时间线：第三季度</code>
+            </div>
+            <p><strong>🎯 目标：</strong> 从核心生态伙伴处，获得正式的监管与商业“运营许可”。</p>
+            <p><strong>✅ 关键产出与衡量标准：</strong> 一份来自泰国银行（BOT）的“监管沙盒”批准函，以及一份与领先银行（如SCB）签署的商业合作协议。</p>
+            <div class="logic">
+                <p><strong>🧠 关键逻辑：</strong> 这是整个计划中最为关键的风险消除阶段。没有监管批准和银行合作伙伴，项目无法合法运营或扩张。第二阶段的成功是开启这些高风险谈判的钥匙。此阶段回答核心问题：<strong>“它合法且被支持吗？”</strong></p>
+            </div>
+        </div>
+
+        <div class="phase">
+            <div class="phase-header">
+                <h3>第四阶段：商业化验证</h3>
+                <code>时间线：第四季度</code>
+            </div>
+            <p><strong>🎯 目标：</strong> 证明产品与市场的契合度，并用真实用户数据验证一个可盈利、可持续的商业模式。</p>
+            <p><strong>✅ 关键产出与衡量标准：</strong> 获取首批1000名活跃用户，产生第一笔交易收入，并建立一个证明 LTV > CAC 的数据模型（目标比率 > 3:1）。</p>
+            <div class="logic">
+                <p><strong>🧠 关键逻辑：</strong> 在扫清了法律和技术障碍后，这最后的验证步骤将证明我们的商业模式在财务上是成立的。它确认了真实用户需要我们的产品，并且我们可以通过盈利的方式获取他们。此阶段回答终极问题：<strong>“这是一门真正的生意吗？”</strong> 成功完成此阶段，将为项目全面扩张提供最终的绿灯。</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function switchLang(lang) {
+        const enContent = document.getElementById('en');
+        const zhContent = document.getElementById('zh');
+        const enButton = document.getElementById('lang-en');
+        const zhButton = document.getElementById('lang-zh');
+
+        if (lang === 'en') {
+            enContent.style.display = 'block';
+            zhContent.style.display = 'none';
+            enButton.classList.add('active');
+            zhButton.classList.remove('active');
+        } else {
+            enContent.style.display = 'none';
+            zhContent.style.display = 'block';
+            enButton.classList.remove('active');
+            zhButton.classList.add('active');
         }
-
-        // Set initial language based on browser preference or default to Chinese
-        document.addEventListener('DOMContentLoaded', () => {
-             // Default to Chinese as requested by user context
-            switchLang('cn');
-        });
-    </script>
+    }
+</script>
 
 </body>
 </html>
