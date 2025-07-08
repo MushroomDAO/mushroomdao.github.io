@@ -1,433 +1,473 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mycelium Protocol Roadmap</title>
+    <title>Roadmap - Mycelium Protocol</title>
     <style>
-        :root {
-            --primary-color: #3498db;
-            --secondary-color: #2980b9;
-            --accent-color: #e74c3c;
-            --text-color: #333;
-            --bg-color: #f9f9f9;
-            --card-bg: #fff;
-            --completed-color: #2ecc71;
-            --in-progress-color: #f39c12;
-            --planned-color: #95a5a6;
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700&display=swap');
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #6c757d;
+            --background-color: #f8f9fa;
+            --text-color: #343a40;
+            --card-bg: #ffffff;
+            --border-color: #e9ecef;
+            --timeline-color: #dee2e6;
         }
 
         body {
-            background-color: var(--bg-color);
+            font-family: 'Inter', 'Noto Sans SC', sans-serif;
+            background-color: var(--background-color);
             color: var(--text-color);
-            line-height: 1.6;
+            line-height: 1.7;
+            margin: 0;
+            padding: 40px 20px;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 900px;
             margin: 0 auto;
-            padding: 2rem;
         }
 
-        header {
+        .header {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 50px;
         }
 
-        h1 {
+        .header h1 {
             font-size: 2.5rem;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
+            font-weight: 700;
+            margin-bottom: 10px;
         }
 
-        .subtitle {
-            font-size: 1.2rem;
-            color: #666;
-            max-width: 800px;
+        .header p {
+            font-size: 1.1rem;
+            color: var(--secondary-color);
+            max-width: 600px;
             margin: 0 auto;
         }
-
-        .roadmap {
-            display: flex;
-            flex-direction: column;
-            gap: 3rem;
+        
+        .lang-switcher {
+            text-align: center;
+            margin-bottom: 40px;
         }
 
-        .phase {
-            background-color: var(--card-bg);
-            border-radius: 10px;
-            padding: 2rem;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .phase-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .phase-title {
-            font-size: 1.8rem;
-            color: var(--primary-color);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .phase-tag {
-            font-size: 0.9rem;
-            font-weight: bold;
-            padding: 0.5rem 1rem;
+        .lang-switcher button {
+            background: none;
+            border: 1px solid var(--border-color);
+            padding: 8px 16px;
+            margin: 0 5px;
+            cursor: pointer;
             border-radius: 20px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .lang-switcher button.active {
+            background-color: var(--primary-color);
             color: white;
+            border-color: var(--primary-color);
         }
 
-        .tag-completed {
-            background-color: var(--completed-color);
+        .roadmap-timeline {
+            position: relative;
+            padding: 20px 0;
         }
 
-        .tag-current {
-            background-color: var(--in-progress-color);
-        }
-
-        .tag-planned {
-            background-color: var(--planned-color);
-        }
-
-        .phase-content {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
+        .roadmap-timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 15px;
+            height: 100%;
+            width: 3px;
+            background-color: var(--timeline-color);
         }
 
         .milestone {
-            display: flex;
-            gap: 1.5rem;
-            align-items: flex-start;
+            position: relative;
+            margin-left: 50px;
+            margin-bottom: 50px;
+            padding: 25px;
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
 
-        .milestone-icon {
-            width: 36px;
-            height: 36px;
-            min-width: 36px;
-            background-color: var(--primary-color);
+        .milestone::before {
+            content: '';
+            position: absolute;
+            top: 30px;
+            left: -44px;
+            height: 18px;
+            width: 18px;
+            background-color: var(--card-bg);
+            border: 3px solid var(--primary-color);
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.2rem;
+            z-index: 1;
         }
 
-        .milestone-detail {
-            flex: 1;
+        .milestone-header {
+            margin-bottom: 20px;
+        }
+
+        .milestone-phase {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .milestone-title {
-            font-size: 1.2rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 5px 0;
+        }
+
+        .milestone-date {
+            font-size: 0.9rem;
             color: var(--secondary-color);
         }
-
-        .milestone-description {
-            color: #666;
+        
+        .milestone-content h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid var(--border-color);
         }
 
-        .phase-accent {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 10px;
-            height: 100%;
+        .milestone-content ul {
+            list-style: none;
+            padding-left: 0;
         }
 
-        .accent-0 {
-            background-color: #3498db;
-        }
-
-        .accent-1 {
-            background-color: #e74c3c;
-        }
-
-        .accent-2 {
-            background-color: #2ecc71;
-        }
-
-        .accent-3 {
-            background-color: #f39c12;
-        }
-
-        .timeline-indicator {
-            position: absolute;
-            left: -50px;
-            top: 0;
-            height: 100%;
-            width: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .timeline-line {
-            height: 100%;
-            width: 2px;
-            background-color: #ddd;
+        .milestone-content li {
+            margin-bottom: 10px;
+            padding-left: 20px;
             position: relative;
         }
 
-        @media (max-width: 768px) {
-            .container {
-                padding: 1rem;
-            }
-
-            .phase {
-                padding: 1.5rem;
-            }
-
-            .timeline-indicator {
-                display: none;
-            }
+        .milestone-content li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-weight: 700;
         }
+
+        .en-content, .cn-content {
+            display: none;
+        }
+
+        .en-content.active, .cn-content.active {
+            display: block;
+        }
+
     </style>
 </head>
 <body>
+
     <div class="container">
-        <header>
-            <h1>Mycelium Protocol Roadmap</h1>
-            <p class="subtitle">
-                Your digital public goods for human digital future.
-            </p>
-        </header>
-
-        <div class="roadmap">
-            <div class="phase">
-                <div class="phase-accent accent-0"></div>
-                <div class="phase-header">
-                    <h2 class="phase-title">
-                        <span>Phase 0</span>
-                        <span class="phase-tag tag-current">In Progress</span>
-                    </h2>
-                </div>
-                <div class="phase-content">
-                    <div class="milestone">
-                        <div class="milestone-icon">✓</div>
-                        <div class="milestone-detail">
-                            <h3 class="milestone-title">Core Components Development</h3>
-                            <p class="milestone-description">
-                                Building the infrastructure of the Mycelium ecosystem through the development of key technical components:
-                            </p>
-                            <ul style="margin-top: 10px; margin-left: 20px;">
-                                <li><strong>SuperPaymaster V0.12</strong> - Enhanced account abstraction infrastructure for seamless transactions</li>
-                                <li><strong>AirAccount V0.2</strong> - Simplified wallet creation and management system</li>
-                                <li><strong>OpenPNTs V0.1</strong> - Interoperable points network for cross-application value transfer</li>
-                                <li><strong>OpenCards V0.1</strong> - Digital identity and membership solution</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="milestone">
-                        <div class="milestone-icon">✓</div>
-                        <div class="milestone-detail">
-                            <h3 class="milestone-title">Developer Infrastructure</h3>
-                            <p class="milestone-description">
-                                Creating essential tools and documentation for developers to build on the Mycelium protocol:
-                            </p>
-                            <ul style="margin-top: 10px; margin-left: 20px;">
-                                <li>Comprehensive SDK for seamless integration</li>
-                                <li>Implementation of multi-signature transaction systems</li>
-                                <li>Point-based gas sponsorship mechanism for fee abstraction</li>
-                                <li>Basic demonstration applications showcasing core functionality</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="milestone">
-                        <div class="milestone-icon">⟳</div>
-                        <div class="milestone-detail">
-                            <h3 class="milestone-title">Protocol Foundation</h3>
-                            <p class="milestone-description">
-                                Establishing the theoretical and operational framework for the protocol:
-                            </p>
-                            <ul style="margin-top: 10px; margin-left: 20px;">
-                                <li>Initial whitepaper draft outlining the protocol's vision, architecture, and mechanics</li>
-                                <li>Protocol launch with basic functionality</li>
-                                <li>Initial community engagement and developer onboarding</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+        <div id="en" class="en-content">
+            <div class="header">
+                <h1>Mycelium Protocol Roadmap</h1>
+                <p>A pragmatic, phased approach to building the future of travel finance, focusing on de-risking and delivering tangible value at every step.</p>
             </div>
-
-            <div class="phase">
-                <div class="phase-accent accent-1"></div>
-                <div class="phase-header">
-                    <h2 class="phase-title">
-                        <span>Phase 1</span>
-                        <span class="phase-tag tag-planned">Planned</span>
-                    </h2>
-                </div>
-                <div class="phase-content">
-                    <div class="milestone">
-                        <div class="milestone-icon">1</div>
-                        <div class="milestone-detail">
-                            <h3 class="milestone-title">Open Source Ecosystem Development</h3>
-                            <p class="milestone-description">
-                                Expanding the OpenNest framework through community-driven development:
-                            </p>
-                            <ul style="margin-top: 10px; margin-left: 20px;">
-                                <li><strong>dApps Collection</strong> - Building essential applications that demonstrate protocol capabilities</li>
-                                <li><strong>AI Integration Tools</strong> - Creating interfaces between AI systems and blockchain functionality</li>
-                                <li><strong>Middleware Layer</strong> - Developing connectors between traditional systems and blockchain infrastructure</li>
-                                <li><strong>SDSS (Standard Decentralized Service System)</strong> - Enabling automated deployment of decentralized services</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="milestone">
-                        <div class="milestone-icon">2</div>
-                        <div class="milestone-detail">
-                            <h3 class="milestone-title">Minimum Viable Ecosystem: zu.Coffee</h3>
-                            <p class="milestone-description">
-                                Establishing initial closed-loop systems to validate protocol effectiveness:
-                            </p>
-                            <ul style="margin-top: 10px; margin-left: 20px;">
-                                <li>Deployment of interconnected applications demonstrating end-to-end functionality</li>
-                                <li>Testing of economic flows within controlled environments</li>
-                                <li>Scenario exploration and experimentation with early adopters</li>
-                                <li>Initial performance metrics and system optimization</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="phase">
-                <div class="phase-accent accent-2"></div>
-                <div class="phase-header">
-                    <h2 class="phase-title">
-                        <span>Phase 2</span>
-                        <span class="phase-tag tag-planned">Planned</span>
-                    </h2>
-                </div>
-                <div class="phase-content">
-                    <div class="milestone">
-                        <div class="milestone-icon">1</div>
-                        <div class="milestone-detail">
-                            <h3 class="milestone-title">Protocol Economics & Governance</h3>
-                            <p class="milestone-description">
-                                Developing sustainable economic models and governance systems:
-                            </p>
-                            <ul style="margin-top: 10px; margin-left: 20px;">
-                                <li>Comprehensive tokenomics framework with utility and governance considerations</li>
-                                <li>Incentive alignment mechanisms for various stakeholders</li>
-                                <li>Initial governance structure for protocol decision-making</li>
-                                <li>Economic simulation and stress testing</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="milestone">
-                        <div class="milestone-icon">2</div>
-                        <div class="milestone-detail">
-                            <h3 class="milestone-title">OpenNest Incubation Program</h3>
-                            <p class="milestone-description">
-                                Supporting real-world applications built on the protocol:
-                            </p>
-                            <ul style="margin-top: 10px; margin-left: 20px;">
-                                <li>Selection and funding of promising dApp projects</li>
-                                <li>Technical support and co-development with selected teams</li>
-                                <li>Field testing with actual users in controlled environments</li>
-                                <li>Validation of sustainable usage patterns and value creation</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="milestone">
-                        <div class="milestone-icon">3</div>
-                        <div class="milestone-detail">
-                            <h3 class="milestone-title">Social Impact Validation</h3>
-                            <p class="milestone-description">
-                                Demonstrating tangible benefits to individual users:
-                            </p>
-                            <ul style="margin-top: 10px; margin-left: 20px;">
-                                <li>Measuring and documenting quality-of-life improvements</li>
-                                <li>Establishing sustainable economic loops with real value exchange</li>
-                                <li>Identifying most impactful use cases for further development</li>
-                                <li>User feedback collection and product iteration</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="phase">
-                <div class="phase-accent accent-3"></div>
-                <div class="phase-header">
-                    <h2 class="phase-title">
-                        <span>Phase 3</span>
-                        <span class="phase-tag tag-planned">Planned</span>
-                    </h2>
-                </div>
-                <div class="phase-content">
-                    <div class="milestone">
-                        <div class="milestone-icon">1</div>
-                        <div class="milestone-detail">
-                            <h3 class="milestone-title">Full Protocol Launch</h3>
-                            <p class="milestone-description">
-                                Delivering a complete, production-ready protocol:
-                            </p>
-                            <ul style="margin-top: 10px; margin-left: 20px;">
-                                <li>Finalized economic model with balanced incentives</li>
-                                <li>Security-audited smart contracts</li>
-                                <li>Testnet deployment and extensive QA</li>
-                                <li>Mainnet launch with initial applications</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="milestone">
-                        <div class="milestone-icon">2</div>
-                        <div class="milestone-detail">
-                            <h3 class="milestone-title">Ecosystem Growth</h3>
-                            <p class="milestone-description">
-                                Expanding the protocol's reach and impact:
-                            </p>
-                            <ul style="margin-top: 10px; margin-left: 20px;">
-                                <li>Community education programs and resources</li>
-                                <li>Developer grants and incentive programs</li>
-                                <li>Cross-community collaborations and integrations</li>
-                                <li>Support for diverse application development across sectors</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="milestone">
-                        <div class="milestone-icon">3</div>
-                        <div class="milestone-detail">
-                            <h3 class="milestone-title">Mass Adoption Initiatives</h3>
-                            <p class="milestone-description">
-                                Breaking down barriers to widespread blockchain usage:
-                            </p>
-                            <ul style="margin-top: 10px; margin-left: 20px;">
-                                <li>User experience refinement for non-technical users</li>
-                                <li>Integration with existing digital identity systems</li>
-                                <li>Strategic partnerships with traditional platforms</li>
-                                <li>Regional adaptation and localization</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+        </div>
+        <div id="cn" class="cn-content">
+            <div class="header">
+                <h1>Mycelium协议 战略路线图</h1>
+                <p>我们采用务实、分阶段的方式构建旅游金融的未来，聚焦于在每个步骤中消除风险并交付可验证的价值。</p>
             </div>
         </div>
 
-        <footer style="margin-top: 4rem; text-align: center; color: #777; font-size: 0.9rem;">
-            <p>This roadmap represents our current plans and is subject to change as the project evolves. We are committed to building a transparent and community-driven protocol.</p>
-            <p style="margin-top: 1rem;">© 2025 Mycelium Protocol</p>
-        </footer>
+        <div class="lang-switcher">
+            <button id="btn-cn" class="active" onclick="switchLang('cn')">中文</button>
+            <button id="btn-en" onclick="switchLang('en')">English</button>
+        </div>
+
+        <div class="roadmap-timeline">
+            <div class="milestone">
+                <div class="en-content">
+                    <div class="milestone-header">
+                        <div class="milestone-phase">Phase 0</div>
+                        <h2 class="milestone-title">Forging the Spear</h2>
+                        <div class="milestone-date">Current - Q4 2025</div>
+                    </div>
+                    <div class="milestone-content">
+                        <h4>Core Objective:</h4>
+                        <ul>
+                            <li>Transform the project concept into a highly executable cooperation plan that gains "principal approval" from key stakeholders.</li>
+                        </ul>
+                        <h4>Key Deliverables:</h4>
+                        <ul>
+                            <li>A comprehensive "Chiang Mai Pilot Compliance & Business White Paper" tailored for banks and government officials.</li>
+                            <li>A clear "Compliance Roadmap" designed within the current legal framework.</li>
+                            <li>A functional, simplified MVP web demo for presentation.</li>
+                            <li>(Goal) A Letter of Intent (LOI) from CMU or a key partner showing interest in the next phase.</li>
+                        </ul>
+                        <h4>Absolute Priority (The ONE Thing):</h4>
+                        <ul>
+                            <li>Finalize the "Compliance & Lobbying Package." This document is the single most critical asset for convincing the first external partners.</li>
+                        </ul>
+                        <h4>Team & Resources:</h4>
+                        <ul>
+                            <li>The two core members lead strategy and document creation.</li>
+                            <li>Student and part-time members support research and MVP prototype development.</li>
+                        </ul>
+                    </div>
+                </div>
+                 <div class="cn-content">
+                    <div class="milestone-header">
+                        <div class="milestone-phase">阶段 0</div>
+                        <h2 class="milestone-title">铸矛</h2>
+                        <div class="milestone-date">当前 - 2025年 Q4</div>
+                    </div>
+                    <div class="milestone-content">
+                        <h4>核心目标:</h4>
+                        <ul>
+                            <li>将项目构想转化为一份获得关键角色“原则性认可”的、高度可执行的合作方案。</li>
+                        </ul>
+                        <h4>关键成果:</h4>
+                        <ul>
+                            <li>完成一份面向银行法务和政府官员的《清迈试点合规与商业白皮书》。</li>
+                            <li>制定一份在现有法律框架下的、清晰的《合规路径图》。</li>
+                            <li>一个可交互的、用于演示的MVP网页版Demo。</li>
+                            <li>(理想目标) 获得一份来自清迈大学或关键伙伴的合作意向书(LOI)。</li>
+                        </ul>
+                        <h4>绝对优先级:</h4>
+                        <ul>
+                            <li>完成“合规与游说方案包”。这份文件是说服第一个外部伙伴的最关键资产。</li>
+                        </ul>
+                        <h4>团队与资源:</h4>
+                        <ul>
+                            <li>两位核心成员主导战略和白皮书撰写。</li>
+                            <li>学生和兼职成员支持资料搜集和MVP原型开发。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="milestone">
+                <div class="en-content">
+                    <div class="milestone-header">
+                        <div class="milestone-phase">Phase 1</div>
+                        <h2 class="milestone-title">The Proving Ground</h2>
+                        <div class="milestone-date">Q1 - Q2 2026</div>
+                    </div>
+                    <div class="milestone-content">
+                        <h4>Core Objective:</h4>
+                        <ul>
+                            <li>To obtain irrefutable data in a controlled, "zero-risk" environment (Chiang Mai University) that proves the product is viable and the user experience is effective.</li>
+                        </ul>
+                        <h4>Key Deliverables:</h4>
+                        <ul>
+                            <li>A functional MVP for internal testing.</li>
+                            <li>A closed-loop campus ecosystem with 50-100 student/faculty users and 2-3 partner merchants.</li>
+                            <li>A comprehensive "CMU Sandbox Data Report" detailing user funnels, transaction success rates, and qualitative feedback.</li>
+                        </ul>
+                        <h4>Absolute Priority (The ONE Thing):</h4>
+                        <ul>
+                            <li>The CMU Sandbox Experiment & Report. This report is the sole passport to walk out of the campus and into the boardrooms of banks and government offices.</li>
+                        </ul>
+                        <h4>Team & Resources:</h4>
+                        <ul>
+                            <li>Core team manages the experiment and analyzes data.</li>
+                            <li>Student members are key for recruiting testers and onboarding merchants.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="cn-content">
+                    <div class="milestone-header">
+                        <div class="milestone-phase">阶段 1</div>
+                        <h2 class="milestone-title">练兵</h2>
+                        <div class="milestone-date">2026年 Q1 - Q2</div>
+                    </div>
+                    <div class="milestone-content">
+                        <h4>核心目标:</h4>
+                        <ul>
+                            <li>在一个完全可控的“无风险”环境（清迈大学）中，用最小代价获取第一份“不可辩驳的数据”，证明产品可行且体验有效。</li>
+                        </ul>
+                        <h4>关键成果:</h4>
+                        <ul>
+                            <li>一个功能性的、用于内部测试的MVP。</li>
+                            <li>一个包含50-100名师生用户和2-3家合作商家的封闭校园生态。</li>
+                            <li>一份详尽的《CMU校园沙盒实验数据报告》，包含用户漏斗、交易成功率和定性反馈。</li>
+                        </ul>
+                        <h4>绝对优先级:</h4>
+                        <ul>
+                            <li>完成校园沙盒实验并产出数据报告。这份报告是走出校园、进入银行和政府会议室的唯一通行证。</li>
+                        </ul>
+                        <h4>团队与资源:</h4>
+                        <ul>
+                            <li>核心团队负责实验管理和数据分析。</li>
+                            <li>学生成员是招募测试者和培训商家的关键执行力量。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="milestone">
+                <div class="en-content">
+                    <div class="milestone-header">
+                        <div class="milestone-phase">Phase 2</div>
+                        <h2 class="milestone-title">Securing the Beachhead</h2>
+                        <div class="milestone-date">Q3 2026 - Q2 2027</div>
+                    </div>
+                    <div class="milestone-content">
+                        <h4>Core Objective:</h4>
+                        <ul>
+                            <li>To conquer the most critical fortress: securing a partnership agreement with a bank (e.g., SCB) and obtaining a "Regulatory Sandbox" permit.</li>
+                        </ul>
+                        <h4>Key Deliverables:</h4>
+                        <ul>
+                            <li>An official "Regulatory Sandbox" approval from the Bank of Thailand or relevant authorities.</li>
+                            <li>A formal technical integration with SCB Bank.</li>
+                            <li>The public launch of the official DApp with real asset conversion capabilities.</li>
+                            <li>Achieve the first 1,000+ real users and 100+ partner merchants.</li>
+                            <li>Generate the first protocol revenue, validating the 1.5% fee model.</li>
+                        </ul>
+                        <h4>Absolute Priority (The ONE Thing):</h4>
+                        <ul>
+                            <li>Sign a "Tripartite Cooperation Agreement" (Bank, Government Body, Mycelium) and receive the "Sandbox Permit." This is the project's D-Day.</li>
+                        </ul>
+                        <h4>Team & Resources:</h4>
+                        <ul>
+                            <li>Core members focus entirely on high-level negotiation and partnership management.</li>
+                            <li>Technical team's primary role is to support the bank's due diligence and integration process.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="cn-content">
+                    <div class="milestone-header">
+                        <div class="milestone-phase">阶段 2</div>
+                        <h2 class="milestone-title">抢滩</h2>
+                        <div class="milestone-date">2026年 Q3 - 2027年 Q2</div>
+                    </div>
+                    <div class="milestone-content">
+                        <h4>核心目标:</h4>
+                        <ul>
+                            <li>攻克整个战役中最重要的碉堡：获得泰国银行（SCB）的合作协议和政府监管机构的“沙盒”许可。</li>
+                        </ul>
+                        <h4>关键成果:</h4>
+                        <ul>
+                            <li>获得泰国银行或相关部门的官方“监管沙盒”许可。</li>
+                            <li>完成与SCB银行的正式技术对接。</li>
+                            <li>发布包含真实资产兑换功能的正式版DApp。</li>
+                            <li>获取首批1000+真实用户和100+合作商家。</li>
+                            <li>产生第一笔协议收入，验证1.5%手续费分成模型。</li>
+                        </ul>
+                        <h4>绝对优先级:</h4>
+                        <ul>
+                            <li>签署“三方合作协议”（银行、政府机构、Mycelium）并获得“沙盒许可”。这是项目的诺曼底登陆日。</li>
+                        </ul>
+                        <h4>团队与资源:</h4>
+                        <ul>
+                            <li>核心成员100%投入到高层沟通和谈判中。</li>
+                            <li>技术团队的主要角色是支持银行的技术尽职调查和集成工作。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="milestone">
+                 <div class="en-content">
+                    <div class="milestone-header">
+                        <div class="milestone-phase">Phase 3</div>
+                        <h2 class="milestone-title">Igniting the Network</h2>
+                        <div class="milestone-date">Q3 2027 Onwards</div>
+                    </div>
+                    <div class="milestone-content">
+                        <h4>Core Objective:</h4>
+                        <ul>
+                            <li>To validate the scalability and profitability of the business model in the Chiang Mai market, and to codify this success into a replicable playbook.</li>
+                        </ul>
+                        <h4>Key Deliverables:</h4>
+                        <ul>
+                            <li>Achieve stable growth and Product-Market Fit in Chiang Mai.</li>
+                            <li>Publish the "City Launch Toolkit" V1.0, including technical, legal, and commercial templates.</li>
+                            <li>Initiate the replication process by signing an MOU for a second pilot city (e.g., Bali, Lisbon).</li>
+                            <li>(Post-validation) Conduct the Token Generation Event (TGE) for the $MYC governance token.</li>
+                        </ul>
+                        <h4>Absolute Priority (The ONE Thing):</h4>
+                        <ul>
+                            <li>Achieve positive unit economics in Chiang Mai and complete the "City Launch Toolkit." Perfect the recipe before opening the next franchise.</li>
+                        </ul>
+                        <h4>Team & Resources:</h4>
+                        <ul>
+                            <li>Team expansion begins here: hire the first full-time "Chiang Mai City Manager."</li>
+                            <li>Core team shifts focus to strategy, fundraising, and global expansion.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="cn-content">
+                    <div class="milestone-header">
+                        <div class="milestone-phase">阶段 3</div>
+                        <h2 class="milestone-title">燎原</h2>
+                        <div class="milestone-date">2027年 Q3 及以后</div>
+                    </div>
+                    <div class="milestone-content">
+                        <h4>核心目标:</h4>
+                        <ul>
+                            <li>在清迈市场验证商业模式的规模化和盈利能力，并将成功经验“产品化”，形成可复制的行动手册。</li>
+                        </ul>
+                        <h4>关键成果:</h4>
+                        <ul>
+                            <li>在清迈市场实现稳定增长和产品-市场契合（Product-Market Fit）。</li>
+                            <li>发布《城市启动工具包V1.0》，包含技术、法律和商业模板。</li>
+                            <li>签署第二个试点城市的合作备忘录（MOU），启动复制流程。</li>
+                            <li>（在模式被充分验证后）进行$MYC治理代币的生成活动（TGE）。</li>
+                        </ul>
+                        <h4>绝对优先级:</h4>
+                        <ul>
+                            <li>在清迈实现正向的单位经济效益，并完成“城市启动工具包”。在开下一家“分店”前，先把“配方”完善到极致。</li>
+                        </ul>
+                        <h4>团队与资源:</h4>
+                        <ul>
+                            <li>团队扩张：招聘第一位全职的“清迈城市经理”。</li>
+                            <li>核心团队转向战略、融资和全球扩张。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
+
+    <script>
+        function switchLang(lang) {
+            const enContents = document.querySelectorAll('.en-content');
+            const cnContents = document.querySelectorAll('.cn-content');
+            const btnEn = document.getElementById('btn-en');
+            const btnCn = document.getElementById('btn-cn');
+
+            if (lang === 'en') {
+                document.documentElement.lang = 'en';
+                enContents.forEach(el => el.classList.add('active'));
+                cnContents.forEach(el => el.classList.remove('active'));
+                btnEn.classList.add('active');
+                btnCn.classList.remove('active');
+            } else {
+                document.documentElement.lang = 'zh-CN';
+                cnContents.forEach(el => el.classList.add('active'));
+                enContents.forEach(el => el.classList.remove('active'));
+                btnCn.classList.add('active');
+                btnEn.classList.remove('active');
+            }
+        }
+
+        // Set initial language based on browser preference or default to Chinese
+        document.addEventListener('DOMContentLoaded', () => {
+             // Default to Chinese as requested by user context
+            switchLang('cn');
+        });
+    </script>
+
 </body>
 </html>
