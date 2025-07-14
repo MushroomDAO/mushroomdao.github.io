@@ -108,6 +108,16 @@
         }
 
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'default',
+            themeVariables: {
+                fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
+            }
+        });
+    </script>
 </head>
 <body>
 
@@ -124,7 +134,7 @@
         <div class="phase">
             <div class="phase-header">
                 <h3>Phase 1: Prototype Validation</h3>
-                <code>Timeline: Quarter 1</code>
+                <code>Timeline: 2025-2026</code>
             </div>
             <p><strong>🎯 Goal:</strong> To prove, at minimal cost, that we can build a technically sound and desirable product.</p>
             <p><strong>✅ Key Outputs & Metrics:</strong> An interactive mobile demo, a technical whitepaper, and approval from technical advisors.</p>
@@ -135,8 +145,36 @@
 
         <div class="phase">
             <div class="phase-header">
+                <h3>Phase 1.1: Micro-circulation Model (Parallel Path)</h3>
+                <code>Timeline: 2025-2026</code>
+            </div>
+            <p><strong>🎯 Goal:</strong> Build a self-sustaining micro-economy from the bottom-up as a risk hedge against institutional resistance.</p>
+            <p><strong>✅ Key Outputs & Metrics:</strong> 3-10 merchant micro-loop with zero-friction onboarding, AI content + Web3 incentives, measurable circulation velocity.</p>
+            <div class="logic">
+                <p><strong>🧠 Strategic Logic:</strong> This parallel path assumes potential failure of institutional partnerships. By proving micro-economic viability with small merchants through CPS payments + AI content + Web3 gamification, we create an alternative sustainable model via open-source protocols. This answers: <strong>"Can we succeed without institutions?"</strong></p>
+            </div>
+            
+            <div style="background: #f8f9fa; padding: 1rem; border-radius: 6px; margin-top: 1rem;">
+                <h4 style="margin: 0 0 0.5rem 0; color: #495057;">Micro-circulation Flow</h4>
+                <div class="mermaid">
+graph TD
+    A["3-10 Small Merchants<br/>Zero Learning Cost"] --> B["AI Content + Recommendation"]
+    B --> C["Web3 Gamified Incentives"]
+    C --> D["CPS Payment Loop"]
+    D --> E["Open Source Protocol<br/>Sustainable Operation"]
+    E --> F["Iterative Product Development"]
+    F --> A
+    
+    style A fill:#f3e5f5
+    style E fill:#e8f5e8
+                </div>
+            </div>
+        </div>
+
+        <div class="phase">
+            <div class="phase-header">
                 <h3>Phase 2: Feasibility Validation</h3>
-                <code>Timeline: Quarter 2</code>
+                <code>Timeline: 2026-2027</code>
             </div>
             <p><strong>🎯 Goal:</strong> To prove the model works in a controlled, real-world environment and gain our first credible local endorsement.</p>
             <p><strong>✅ Key Outputs & Metrics:</strong> A <em>CMU Sandbox Test Report</em> (with metrics like >99.5% transaction success, >50 NPS) and a signed Memorandum of Understanding (MOU) with Chiang Mai University.</p>
@@ -148,7 +186,7 @@
         <div class="phase">
             <div class="phase-header">
                 <h3>Phase 3: Legitimacy Validation</h3>
-                <code>Timeline: Quarter 3</code>
+                <code>Timeline: 2026-2027</code>
             </div>
             <p><strong>🎯 Goal:</strong> To secure the official regulatory and commercial "licenses to operate" from key ecosystem players.</p>
             <p><strong>✅ Key Outputs & Metrics:</strong> An approval letter for the Bank of Thailand (BOT) "Regulatory Sandbox" and a signed commercial partnership agreement with a leading bank (e.g., SCB).</p>
@@ -160,7 +198,7 @@
         <div class="phase">
             <div class="phase-header">
                 <h3>Phase 4: Commercial Validation</h3>
-                <code>Timeline: Quarter 4</code>
+                <code>Timeline: 2027-2028</code>
             </div>
             <p><strong>🎯 Goal:</strong> To prove product-market fit and demonstrate a profitable, sustainable business model with real users.</p>
             <p><strong>✅ Key Outputs & Metrics:</strong> Acquisition of the first 1,000 active users, first transaction revenue, and a data-backed model proving LTV > CAC (target ratio > 3:1).</p>
@@ -177,10 +215,10 @@
         <div class="phase">
             <div class="phase-header">
                 <h3>第一阶段：原型验证</h3>
-                <code>时间线：第一季度</code>
+                <code>时间线：2025-2026</code>
             </div>
             <p><strong>🎯 目标：</strong> 以最低成本证明我们有能力打造出一款技术可靠且用户体验卓越的产品。</p>
-            <p><strong>✅ 关键产出与衡量标准：</strong> 一个可交互的移动端Demo，一份技术白皮书，并获得技术顾问认可。</p>
+            <p><strong>✅ 关键产出与衡量标准：</strong> 一个可交互的移动端 Demo，一份技术白皮书，并获得技术顾问认可。</p>
             <div class="logic">
                 <p><strong>🧠 关键逻辑：</strong> 这是根基。在与外部伙伴接洽前，我们必须拥有能证明自身技术实力、清晰阐述愿景的有形资产。此阶段回答核心问题：<strong>“我们能做出来吗？”</strong> 其产出是开启第二阶段对话的必备工具。</p>
             </div>
@@ -188,11 +226,39 @@
 
         <div class="phase">
             <div class="phase-header">
+                <h3>第 1.1 阶段：微循环模型（并行路径）</h3>
+                <code>时间线：2025-2026</code>
+            </div>
+            <p><strong>🎯 目标：</strong> 自底向上构建自维持微观经济生态，作为机构合作阻力的风险对冲策略。</p>
+            <p><strong>✅ 关键产出与衡量标准：</strong> 3-10 家商户微循环，零认知成本接入，AI 内容+Web3 激励，可量化的循环流速。</p>
+            <div class="logic">
+                <p><strong>🧠 关键逻辑：</strong> 此并行路径假设机构合作可能受阻。通过 CPS 支付+AI 内容+Web3 游戏化激励，在小商户中验证微观经济可行性，以开源协议构建替代可持续模式。此阶段回答核心问题：<strong>"脱离机构我们能成功吗？"</strong></p>
+            </div>
+            
+            <div style="background: #f8f9fa; padding: 1rem; border-radius: 6px; margin-top: 1rem;">
+                <h4 style="margin: 0 0 0.5rem 0; color: #495057;">微循环流程</h4>
+                <div class="mermaid">
+graph TD
+    A["3-10 家小商户<br/>零学习成本"] --> B["AI 内容 + 推荐"]
+    B --> C["Web3 游戏化激励"]
+    C --> D["CPS 支付循环"]
+    D --> E["开源协议<br/>可持续运营"]
+    E --> F["产品迭代优化"]
+    F --> A
+    
+    style A fill:#f3e5f5
+    style E fill:#e8f5e8
+                </div>
+            </div>
+        </div>
+
+        <div class="phase">
+            <div class="phase-header">
                 <h3>第二阶段：可行性验证</h3>
-                <code>时间线：第二季度</code>
+                <code>时间线：2026-2027</code>
             </div>
             <p><strong>🎯 目标：</strong> 证明我们的模式能在受控的真实环境中运行，并获得第一个来自本地权威机构的认可。</p>
-            <p><strong>✅ 关键产出与衡量标准：</strong> 一份《清迈大学沙盒测试报告》（指标如 >99.5%交易成功率，>50净推荐值），以及一份与清迈大学（CMU）正式签署的合作备忘录（MOU）。</p>
+            <p><strong>✅ 关键产出与衡量标准：</strong> 一份《清迈大学沙盒测试报告》（指标如 >99.5% 交易成功率，>50 净推荐值），以及一份与清迈大学（CMU）正式签署的合作备忘录（MOU）。</p>
             <div class="logic">
                 <p><strong>🧠 关键逻辑：</strong> 此步骤将项目从“概念”推向在“实验室”环境中被验证的解决方案。数据报告提供了具体的性能证据，而与清迈大学的合作则给予了至关重要的本地信誉背书。此阶段回答核心问题：<strong>“这个模式在这里行得通吗？”</strong> 这份信誉背书是第三阶段与保守的金融机构成功对话的先决条件。</p>
             </div>
@@ -201,10 +267,10 @@
         <div class="phase">
             <div class="phase-header">
                 <h3>第三阶段：合法性验证</h3>
-                <code>时间线：第三季度</code>
+                <code>时间线：2026-2027</code>
             </div>
             <p><strong>🎯 目标：</strong> 从核心生态伙伴处，获得正式的监管与商业“运营许可”。</p>
-            <p><strong>✅ 关键产出与衡量标准：</strong> 一份来自泰国银行（BOT）的“监管沙盒”批准函，以及一份与领先银行（如SCB）签署的商业合作协议。</p>
+            <p><strong>✅ 关键产出与衡量标准：</strong> 一份来自泰国银行（BOT）的“监管沙盒”批准函，以及一份与领先银行（如 SCB）签署的商业合作协议。</p>
             <div class="logic">
                 <p><strong>🧠 关键逻辑：</strong> 这是整个计划中最为关键的风险消除阶段。没有监管批准和银行合作伙伴，项目无法合法运营或扩张。第二阶段的成功是开启这些高风险谈判的钥匙。此阶段回答核心问题：<strong>“它合法且被支持吗？”</strong></p>
             </div>
@@ -213,10 +279,10 @@
         <div class="phase">
             <div class="phase-header">
                 <h3>第四阶段：商业化验证</h3>
-                <code>时间线：第四季度</code>
+                <code>时间线：2027-2028</code>
             </div>
             <p><strong>🎯 目标：</strong> 证明产品与市场的契合度，并用真实用户数据验证一个可盈利、可持续的商业模式。</p>
-            <p><strong>✅ 关键产出与衡量标准：</strong> 获取首批1000名活跃用户，产生第一笔交易收入，并建立一个证明 LTV > CAC 的数据模型（目标比率 > 3:1）。</p>
+            <p><strong>✅ 关键产出与衡量标准：</strong> 获取首批 1000 名活跃用户，产生第一笔交易收入，并建立一个证明 LTV > CAC 的数据模型（目标比率 > 3:1）。</p>
             <div class="logic">
                 <p><strong>🧠 关键逻辑：</strong> 在扫清了法律和技术障碍后，这最后的验证步骤将证明我们的商业模式在财务上是成立的。它确认了真实用户需要我们的产品，并且我们可以通过盈利的方式获取他们。此阶段回答终极问题：<strong>“这是一门真正的生意吗？”</strong> 成功完成此阶段，将为项目全面扩张提供最终的绿灯。</p>
             </div>
@@ -224,26 +290,36 @@
     </div>
 </div>
 
-<script>
-    function switchLang(lang) {
-        const enContent = document.getElementById('en');
-        const zhContent = document.getElementById('zh');
-        const enButton = document.getElementById('lang-en');
-        const zhButton = document.getElementById('lang-zh');
+    <script>
+        function switchLang(lang) {
+            const enContent = document.getElementById('en');
+            const zhContent = document.getElementById('zh');
+            const enButton = document.getElementById('lang-en');
+            const zhButton = document.getElementById('lang-zh');
 
-        if (lang === 'en') {
-            enContent.style.display = 'block';
-            zhContent.style.display = 'none';
-            enButton.classList.add('active');
-            zhButton.classList.remove('active');
-        } else {
-            enContent.style.display = 'none';
-            zhContent.style.display = 'block';
-            enButton.classList.remove('active');
-            zhButton.classList.add('active');
+            if (lang === 'en') {
+                enContent.style.display = 'block';
+                zhContent.style.display = 'none';
+                enButton.classList.add('active');
+                zhButton.classList.remove('active');
+            } else {
+                enContent.style.display = 'none';
+                zhContent.style.display = 'block';
+                enButton.classList.remove('active');
+                zhButton.classList.add('active');
+                
+                // Re-render mermaid diagrams for Chinese version
+                setTimeout(function() {
+                    mermaid.init(undefined, document.querySelectorAll('#zh .mermaid'));
+                }, 100);
+            }
         }
-    }
-</script>
+        
+        // Initialize mermaid diagrams after page load
+        document.addEventListener('DOMContentLoaded', function() {
+            mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+        });
+    </script>
 
 </body>
 </html>
