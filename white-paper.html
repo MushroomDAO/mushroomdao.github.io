@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mycelium Protocol - MushroomDAO Whitepaper</title>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PVE48HJTCR"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-PVE48HJTCR');
+    </script>
     <style>
         * {
             margin: 0;
@@ -143,10 +151,13 @@
         }
 
         .header h1 {
-            font-size: 3.5rem;
-            margin-bottom: 10px;
+            font-size: 4.5rem;
+            margin-bottom: 15px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-weight: 700;
+            letter-spacing: -1px;
+            background: linear-gradient(45deg, #2b5876, #4e4376);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -183,6 +194,9 @@
             overflow: hidden;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255,255,255,0.2);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
 
         .card:hover {
@@ -251,6 +265,7 @@
             color: #5a6c7d;
             line-height: 1.6;
             margin-bottom: 20px;
+            flex-grow: 1;
         }
 
         .card-link {
@@ -264,6 +279,7 @@
             font-weight: 500;
             width: 100%;
             text-align: center;
+            margin-top: auto;
         }
 
         .card-link:hover {
@@ -395,7 +411,7 @@
                     </div>
                     <h3>白皮书</h3>
                     <p>深入探讨社会问题与解决方案，包含技术架构、商业模式和实施路径的完整研究文档。涵盖我们对去中心化协作的思考与技术创新。</p>
-                    <a href="/docs/#/whitepaper-zh" class="card-link">查看白皮书</a>
+                    <a href="/docs/#/whitepaper-zh" class="card-link" target="_blank">查看白皮书</a>
                 </div>
 
                 <div class="card fade-in">
@@ -406,7 +422,7 @@
                     </div>
                     <h3>路线图</h3>
                     <p>协议发展的关键节点与目标规划，从基础设施建设到开放花园生态的完整路线图。秉持开放态度，构建可持续发展的协作平台。</p>
-                    <a href="./Roadmap.html" class="card-link">查看路线图</a>
+                    <a href="./Roadmap.html" class="card-link" target="_blank">查看路线图</a>
                 </div>
 
                 <div class="card fade-in">
@@ -419,7 +435,7 @@
                     </div>
                     <h3>代币经济</h3>
                     <p>创新的代币经济体系，包括治理代币 GToken 和基于 OpenPNTs 协议的 mPNTs。支持任何组织和个体发行自己的忠诚度积分代币。</p>
-                    <a href="/docs/#/tokenomics-zh" class="card-link">了解 Tokenomics</a>
+                    <a href="/docs/#/tokenomics-zh" class="card-link" target="_blank">了解 Tokenomics</a>
                 </div>
                 <div class="card fade-in">
                     <div class="illustration more">
@@ -432,7 +448,7 @@
                     </div>
                     <h3>协议</h3>
                     <p>探索更多:Mycelium Protocol, 资源和工具，包括协议细节、开发者文档、社区资源、合作伙伴信息、技术博客和生态最新动态。</p>
-                    <a href="/docs/#/protocol-zh" class="card-link">Protocol</a>
+                    <a href="/docs/#/protocol-zh" class="card-link" target="_blank">Protocol</a>
                 </div>
                 <div class="card fade-in">
                     <div class="illustration dao">
@@ -445,7 +461,7 @@
                     </div>
                     <h3>DAO</h3>
                     <p>去中心化自治组织的架构设计与治理模式，构建协作与互操作的协议体系。实现真正的社区自治与价值共创。</p>
-                    <a href="/docs/#/dao-zh" class="card-link">探索 DAO</a>
+                    <a href="/docs/#/dao-zh" class="card-link" target="_blank">探索 DAO</a>
                 </div>
 
                 <div class="card fade-in">
@@ -460,7 +476,7 @@
                     </div>
                     <h3>演示</h3>
                     <p>体验 Mycelium 协议的实际应用演示，包括去中心化协作工具、治理投票系统和代币经济的互动展示。直观感受协议的强大功能。</p>
-                    <a href="/docs/#/demo-zh" class="card-link">体验 Demo</a>
+                    <a href="/docs/#/demo-zh" class="card-link" target="_blank">体验 Demo</a>
                 </div>
 
             </div>
@@ -469,10 +485,9 @@
                 <p><strong>Mycelium Protocol</strong></p>
                 <p>像菌丝网络一样连接世界，构建去中心化的协作未来</p>
                 <div class="social-links">
-                    <a href="#" title="GitHub">💻</a>
-                    <a href="#" title="Twitter">🐦</a>
-                    <a href="#" title="Discord">💬</a>
-                    <a href="#" title="Telegram">📱</a>
+                    <a href="https://github.com/MushroomDAO" title="GitHub" target="_blank">💻</a>
+                    <a href="https://x.com/mushroomdao1984" title="Twitter" target="_blank">🐦</a>
+                    <a href="https://t.me/Account_Abstraction_Community" title="Telegram" target="_blank">📱</a>
                 </div>
             </footer>
         </div>
@@ -498,7 +513,7 @@
                     </div>
                     <h3>Whitepaper</h3>
                     <p>In-depth exploration of social problems and solutions, including comprehensive research documents on technical architecture, business models, and implementation paths. Covers our thoughts on decentralized collaboration and technological innovation.</p>
-                    <a href="/docs/#/whitepaper-en" class="card-link">View Lite Whitepaper</a>
+                    <a href="/docs/#/whitepaper-en" class="card-link" target="_blank">View Lite Whitepaper</a>
                 </div>
 
                 <div class="card fade-in">
@@ -509,7 +524,7 @@
                     </div>
                     <h3>Roadmap</h3>
                     <p>Key development nodes and goal planning for the protocol, from infrastructure construction to an open garden ecosystem roadmap. Maintaining an open attitude to build a sustainable collaborative platform.</p>
-                    <a href="./Roadmap.html" class="card-link">View Roadmap</a>
+                    <a href="./Roadmap.html" class="card-link" target="_blank">View Roadmap</a>
                 </div>
 
                 <div class="card fade-in">
@@ -522,7 +537,7 @@
                     </div>
                     <h3>Tokenomics</h3>
                     <p>Innovative token economic system, including governance tokens GToken and the mPNTs under OpenPNTs protocol. Supports any organization and individual to issue their own loyalty tokens.</p>
-                    <a href="/docs/#/tokenomics-en" class="card-link">Learn Tokenomics</a>
+                    <a href="/docs/#/tokenomics-en" class="card-link" target="_blank">Learn Tokenomics</a>
                 </div>
                 <div class="card fade-in">
                     <div class="illustration more">
@@ -535,7 +550,7 @@
                     </div>
                     <h3>Protocol</h3>
                     <p>Explore Mycelium Protocol, resources and tools, including developer documentation, community resources, partner information, technical blogs, and the latest developments in the ecosystem.</p>
-                    <a href="/docs/#/protocol-en" class="card-link">Protocol</a>
+                    <a href="/docs/#/protocol-en" class="card-link" target="_blank">Protocol</a>
                 </div>
                 <div class="card fade-in">
                     <div class="illustration dao">
@@ -548,7 +563,7 @@
                     </div>
                     <h3>DAO</h3>
                     <p>Architectural design and governance model of decentralized autonomous organization, building collaborative and interoperable protocol systems. Achieving true community autonomy and value co-creation.</p>
-                    <a href="/docs/#/dao-en" class="card-link">Explore DAO</a>
+                    <a href="/docs/#/dao-en" class="card-link" target="_blank">Explore DAO</a>
                 </div>
 
                 <div class="card fade-in">
@@ -563,7 +578,7 @@
                     </div>
                     <h3>Demo</h3>
                     <p>Experience practical application demonstrations of the Mycelium protocol, including decentralized collaboration tools, governance voting systems, and interactive displays of token economics. Feel the powerful functions of the protocol intuitively.</p>
-                    <a href="/docs/#/demo-en" class="card-link">Try Demo</a>
+                    <a href="/docs/#/demo-en" class="card-link" target="_blank">Try Demo</a>
                 </div>
 
             </div>
@@ -572,10 +587,9 @@
                 <p><strong>Mycelium Protocol</strong></p>
                 <p>Connecting the world like mycelial networks, building a decentralized collaborative future</p>
                 <div class="social-links">
-                    <a href="#" title="GitHub">💻</a>
-                    <a href="#" title="Twitter">🐦</a>
-                    <a href="#" title="Discord">💬</a>
-                    <a href="#" title="Telegram">📱</a>
+                    <a href="https://github.com/MushroomDAO" title="GitHub" target="_blank">💻</a>
+                    <a href="https://x.com/mushroomdao1984" title="Twitter" target="_blank">🐦</a>
+                    <a href="https://t.me/Account_Abstraction_Community" title="Telegram" target="_blank">📱</a>
                 </div>
             </footer>
         </div>
