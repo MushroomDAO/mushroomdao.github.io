@@ -239,6 +239,58 @@
 		.tier-fill { height: 100%; background: #cf9818; border-radius: 2px; transition: width 0.5s; }
 		.cl-actions { display: flex; gap: 12px; flex-wrap: wrap; }
 
+		/* Docs Nav */
+		.docs-nav {
+			max-width: 860px;
+			margin: 0 auto 12px;
+			padding: 0 24px;
+		}
+		.docs-nav-label {
+			font-size: 0.72rem;
+			letter-spacing: 2px;
+			text-transform: uppercase;
+			color: rgba(255,255,255,0.35);
+			margin-bottom: 14px;
+			text-align: center;
+		}
+		.doc-cards {
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+			gap: 12px;
+		}
+		.doc-card {
+			background: rgba(255,255,255,0.04);
+			border: 1px solid rgba(255,255,255,0.08);
+			border-radius: 12px;
+			padding: 18px 20px;
+			display: flex;
+			flex-direction: column;
+			gap: 8px;
+			transition: border-color 0.2s;
+			text-decoration: none;
+		}
+		.doc-card:hover { border-color: rgba(207,152,24,0.4); }
+		.doc-card-icon { font-size: 1.3rem; }
+		.doc-card-title {
+			font-size: 0.9rem;
+			font-weight: 600;
+			color: #fff;
+		}
+		.doc-card-desc {
+			font-size: 0.75rem;
+			color: rgba(255,255,255,0.5);
+			line-height: 1.55;
+			flex: 1;
+		}
+		.doc-card-cta {
+			font-size: 0.75rem;
+			color: #cf9818;
+			margin-top: 4px;
+		}
+
+		body.lang-en [data-lang="en"].doc-cards,
+		body.lang-zh [data-lang="zh"].doc-cards { display: grid; }
+
 		/* Progress strip */
 		.progress-strip {
 			max-width: 860px;
@@ -301,11 +353,11 @@
 			<span>MushroomDAO</span>
 		</a>
 		<div class="nav-links">
-			<a href="https://www.mushroom.box/Roadmap.html">
+			<a href="Roadmap.html">
 				<span class="lang-en-inline">Roadmap</span>
 				<span class="lang-zh-inline">路线图</span>
 			</a>
-			<a href="https://docs.mushroom.box" class="btn-docs">
+			<a href="/docs/#/" class="btn-docs">
 				<span class="lang-en-inline">Docs</span>
 				<span class="lang-zh-inline">文档</span>
 			</a>
@@ -335,11 +387,11 @@
 		</p>
 
 		<div class="hero-cta">
-			<a href="https://docs.mushroom.box" class="btn-primary">
+			<a href="/docs/#/whitepaper-en" class="btn-primary">
 				<span class="lang-en-inline">Read the Whitepaper</span>
 				<span class="lang-zh-inline">阅读白皮书</span>
 			</a>
-			<a href="https://www.mushroom.box/Roadmap.html" class="btn-secondary">
+			<a href="Roadmap.html" class="btn-secondary">
 				<span class="lang-en-inline">View Roadmap</span>
 				<span class="lang-zh-inline">查看路线图</span>
 			</a>
@@ -374,8 +426,8 @@
 		</div>
 
 		<div class="commercial-banner">
-			<span data-lang="en">💼 Small business? <a href="https://docs.mushroom.box/#/services-en" target="_blank">See commercial services →</a> &nbsp;|&nbsp; Free website at <a href="https://forest.mushroom.cv" target="_blank">forest.mushroom.cv</a></span>
-			<span data-lang="zh">💼 小商户？<a href="https://docs.mushroom.box/#/services-zh" target="_blank">查看商业服务 →</a> &nbsp;|&nbsp; 免费建站：<a href="https://forest.mushroom.cv" target="_blank">forest.mushroom.cv</a></span>
+			<span data-lang="en">💼 Small business? <a href="/docs/#/services-en" target="_blank">See commercial services →</a> &nbsp;|&nbsp; Free website at <a href="https://forest.mushroom.cv" target="_blank">forest.mushroom.cv</a></span>
+			<span data-lang="zh">💼 小商户？<a href="/docs/#/services-zh" target="_blank">查看商业服务 →</a> &nbsp;|&nbsp; 免费建站：<a href="https://forest.mushroom.cv" target="_blank">forest.mushroom.cv</a></span>
 		</div>
 	</section>
 
@@ -434,11 +486,96 @@
 		</div>
 
 		<div class="cl-actions">
-			<a href="https://docs.mushroom.box/#/cold-launch-en" class="btn-primary" data-lang="en">Read Launch Details</a>
-			<a href="https://docs.mushroom.box/#/cold-launch-zh" class="btn-primary" data-lang="zh">了解冷启动详情</a>
+			<a href="/docs/#/cold-launch-en" class="btn-primary" data-lang="en">Read Launch Details</a>
+			<a href="/docs/#/cold-launch-zh" class="btn-primary" data-lang="zh">了解冷启动详情</a>
 			<a href="https://www.mushroom.cv/" class="btn-secondary" target="_blank">
 				<span class="lang-en-inline">Live Dev Progress ↗</span>
 				<span class="lang-zh-inline">实时开发进度 ↗</span>
+			</a>
+		</div>
+	</section>
+
+	<!-- Docs Navigation Cards -->
+	<section class="docs-nav">
+		<p class="docs-nav-label">
+			<span class="lang-en-inline">Explore the Protocol</span>
+			<span class="lang-zh-inline">探索协议生态</span>
+		</p>
+		<div class="doc-cards" data-lang="en">
+			<a class="doc-card" href="/docs/#/whitepaper-en">
+				<div class="doc-card-icon">📄</div>
+				<div class="doc-card-title">Whitepaper</div>
+				<div class="doc-card-desc">In-depth exploration of social problems and solutions — technical architecture, business models, and implementation paths for decentralized collaboration.</div>
+				<div class="doc-card-cta">View Lite Whitepaper →</div>
+			</a>
+			<a class="doc-card" href="/docs/#/roadmap-en">
+				<div class="doc-card-icon">🗺️</div>
+				<div class="doc-card-title">Roadmap</div>
+				<div class="doc-card-desc">Key development milestones and goal planning — from infrastructure construction to an open ecosystem. Phase 1 Genesis Launch active (2026.03.30).</div>
+				<div class="doc-card-cta">View Roadmap →</div>
+			</a>
+			<a class="doc-card" href="/docs/#/tokenomics-en">
+				<div class="doc-card-icon">🪙</div>
+				<div class="doc-card-title">Tokenomics</div>
+				<div class="doc-card-desc">Innovative token economic system — governance token GToken (21M fixed) and mPNTs under the OpenPNTs protocol. Any organization can issue their own loyalty tokens.</div>
+				<div class="doc-card-cta">Learn Tokenomics →</div>
+			</a>
+			<a class="doc-card" href="/docs/#/protocol-en">
+				<div class="doc-card-icon">🔗</div>
+				<div class="doc-card-title">Protocol</div>
+				<div class="doc-card-desc">Explore Mycelium Protocol resources and tools — developer docs, community resources, partner information, technical blogs, and ecosystem updates.</div>
+				<div class="doc-card-cta">Protocol Docs →</div>
+			</a>
+			<a class="doc-card" href="/docs/#/dao-en">
+				<div class="doc-card-icon">🏛️</div>
+				<div class="doc-card-title">DAO</div>
+				<div class="doc-card-desc">Architectural design and governance model of the decentralized autonomous organization — building collaborative, interoperable protocol systems for true community autonomy.</div>
+				<div class="doc-card-cta">Explore DAO →</div>
+			</a>
+			<a class="doc-card" href="/docs/#/demo-en">
+				<div class="doc-card-icon">🎮</div>
+				<div class="doc-card-title">Demo &amp; Products</div>
+				<div class="doc-card-desc">Practical application demos of the Mycelium Protocol — decentralized collaboration tools, governance voting, token economics in action, and live development progress.</div>
+				<div class="doc-card-cta">Try Demo →</div>
+			</a>
+		</div>
+
+		<div class="doc-cards" data-lang="zh">
+			<a class="doc-card" href="/docs/#/whitepaper-zh">
+				<div class="doc-card-icon">📄</div>
+				<div class="doc-card-title">白皮书</div>
+				<div class="doc-card-desc">深入探讨社会问题与解决方案，包括技术架构、商业模式和实施路径的综合研究。涵盖对去中心化协作和技术创新的深度思考。</div>
+				<div class="doc-card-cta">阅读精简版白皮书 →</div>
+			</a>
+			<a class="doc-card" href="/docs/#/roadmap-zh">
+				<div class="doc-card-icon">🗺️</div>
+				<div class="doc-card-title">路线图</div>
+				<div class="doc-card-desc">协议关键发展节点与目标规划——从基础设施建设到开放生态系统。Phase 1 创世启动进行中（2026.03.30）。</div>
+				<div class="doc-card-cta">查看路线图 →</div>
+			</a>
+			<a class="doc-card" href="/docs/#/tokenomics-zh">
+				<div class="doc-card-icon">🪙</div>
+				<div class="doc-card-title">代币经济学</div>
+				<div class="doc-card-desc">创新的代币经济系统——治理代币 GToken（2100万恒定供应）与 OpenPNTs 协议下的 mPNTs。支持任何组织和个人发行自己的积分代币。</div>
+				<div class="doc-card-cta">了解代币经济学 →</div>
+			</a>
+			<a class="doc-card" href="/docs/#/protocol-zh">
+				<div class="doc-card-icon">🔗</div>
+				<div class="doc-card-title">协议</div>
+				<div class="doc-card-desc">探索 Mycelium 协议的资源与工具——开发者文档、社区资源、合作伙伴信息、技术博客和生态系统最新动态。</div>
+				<div class="doc-card-cta">协议文档 →</div>
+			</a>
+			<a class="doc-card" href="/docs/#/dao-zh">
+				<div class="doc-card-icon">🏛️</div>
+				<div class="doc-card-title">DAO 组织</div>
+				<div class="doc-card-desc">去中心化自治组织的架构设计和治理模型——构建协作可互操作的协议系统，实现真正的社区自治和价值共创。</div>
+				<div class="doc-card-cta">探索 DAO →</div>
+			</a>
+			<a class="doc-card" href="/docs/#/demo-zh">
+				<div class="doc-card-icon">🎮</div>
+				<div class="doc-card-title">Demo 与产品</div>
+				<div class="doc-card-desc">体验 Mycelium 协议的实际应用演示——去中心化协作工具、治理投票系统和代币经济学互动展示，直观感受协议强大功能。</div>
+				<div class="doc-card-cta">体验 Demo →</div>
 			</a>
 		</div>
 	</section>
