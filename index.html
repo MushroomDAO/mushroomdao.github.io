@@ -15,9 +15,10 @@
 
 		body {
 			background-image: url('background.png');
-			background-size: cover;
-			background-position: center;
+			background-size: 55%;
+			background-position: right bottom;
 			background-repeat: no-repeat;
+			background-color: #0d0d18;
 			min-height: 100vh;
 			font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 			color: #ffffff;
@@ -288,8 +289,9 @@
 			margin-top: 4px;
 		}
 
-		body.lang-en [data-lang="en"].doc-cards,
-		body.lang-zh [data-lang="zh"].doc-cards { display: grid; }
+		.doc-lang-wrap { display: none; }
+		body.lang-en .doc-lang-en { display: block; }
+		body.lang-zh .doc-lang-zh { display: block; }
 
 		/* Progress strip */
 		.progress-strip {
@@ -371,19 +373,19 @@
 		<p class="hero-tagline">Mycelium Protocol</p>
 
 		<h1 data-lang="en">
-			Web3 for <span>Ordinary People</span><br>Not Just Developers
+			<span>Digital Public Goods</span><br>& Collaborative Networks
 		</h1>
 		<h1 data-lang="zh">
-			面向<span>普通人</span>的 Web3<br>而不只是开发者
+			<span>数字公共物品</span><br>与协作网络
 		</h1>
 
 		<p data-lang="en">
-			MushroomDAO builds open decentralized infrastructure — no private keys to lose, no gas fees to worry about.
-			Inspired by 4.5 billion years of fungal cooperation, we're rewiring how value flows.
+			MushroomDAO builds open decentralized infrastructure for loose communities and extreme individuals —
+			no private keys to lose, no gas fees to worry about. Inspired by 4.5 billion years of fungal cooperation.
 		</p>
 		<p data-lang="zh">
-			MushroomDAO 构建开放的去中心化基础设施——无需保管私钥，无需担心 Gas 费用。
-			灵感源自 45 亿年的菌丝协作，我们重新定义价值流动方式。
+			MushroomDAO 为松散社区与极致个体构建开放的去中心化基础设施——
+			无需保管私钥，无需担心 Gas 费用。灵感源自 45 亿年的菌丝协作。
 		</p>
 
 		<div class="hero-cta">
@@ -501,7 +503,8 @@
 			<span class="lang-en-inline">Explore the Protocol</span>
 			<span class="lang-zh-inline">探索协议生态</span>
 		</p>
-		<div class="doc-cards" data-lang="en">
+		<div class="doc-lang-wrap doc-lang-en">
+		<div class="doc-cards">
 			<a class="doc-card" href="/docs/#/whitepaper-en">
 				<div class="doc-card-icon">📄</div>
 				<div class="doc-card-title">Whitepaper</div>
@@ -538,9 +541,10 @@
 				<div class="doc-card-desc">Practical application demos of the Mycelium Protocol — decentralized collaboration tools, governance voting, token economics in action, and live development progress.</div>
 				<div class="doc-card-cta">Try Demo →</div>
 			</a>
-		</div>
+		</div></div>
 
-		<div class="doc-cards" data-lang="zh">
+		<div class="doc-lang-wrap doc-lang-zh">
+		<div class="doc-cards">
 			<a class="doc-card" href="/docs/#/whitepaper-zh">
 				<div class="doc-card-icon">📄</div>
 				<div class="doc-card-title">白皮书</div>
@@ -577,7 +581,7 @@
 				<div class="doc-card-desc">体验 Mycelium 协议的实际应用演示——去中心化协作工具、治理投票系统和代币经济学互动展示，直观感受协议强大功能。</div>
 				<div class="doc-card-cta">体验 Demo →</div>
 			</a>
-		</div>
+		</div></div>
 	</section>
 
 	<!-- Live Progress Strip -->
