@@ -14,22 +14,34 @@
 		* { box-sizing: border-box; margin: 0; padding: 0; }
 
 		body {
-			background-image: url('background.png');
-			background-size: 80%;
-			background-position: center;
-			background-repeat: no-repeat;
-			background-color: #0d0d18;
+			background-color: #07070f;
 			min-height: 100vh;
 			font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 			color: #ffffff;
 		}
 
+		#canvas-bg {
+			position: absolute;
+			inset: 0;
+			width: 100%; height: 100%;
+			z-index: 0;
+			pointer-events: none;
+		}
+
 		/* Overlay for readability */
 		.overlay {
+			position: relative;
 			min-height: 100vh;
-			background: linear-gradient(135deg, rgba(0,0,0,0.65) 0%, rgba(20,10,40,0.55) 100%);
+			background: transparent;
 			display: flex;
 			flex-direction: column;
+			overflow: hidden;
+		}
+
+		/* All direct content sits above canvas */
+		nav, section, .links-row {
+			position: relative;
+			z-index: 1;
 		}
 
 		/* Nav */
@@ -348,6 +360,7 @@
 </head>
 <body class="lang-en">
 <div class="overlay">
+<canvas id="canvas-bg"></canvas>
 
 	<nav>
 		<a class="nav-brand" href="/">
@@ -620,6 +633,108 @@
 </div>
 
 <script>
+// ── Mycelium canvas background ──────────────────────────────────────────────
+(function () {
+	const canvas = document.getElementById('canvas-bg');
+	const ctx = canvas.getContext('2d');
+	const GOLD = [200, 210, 220];
+	const PURPLE = [160, 170, 190];
+	let W, H, particles;
+
+	function resize() {
+		W = canvas.width = canvas.offsetWidth;
+		H = canvas.height = canvas.offsetHeight;
+	}
+
+	function rand(a, b) { return a + Math.random() * (b - a); }
+
+	function mkParticle() {
+		return {
+			x: rand(0, W), y: rand(0, H),
+			vx: rand(-0.25, 0.25), vy: rand(-0.25, 0.25),
+			r: rand(1.2, 2.5),
+			// each particle slowly pulses
+			phase: rand(0, Math.PI * 2),
+			speed: rand(0.008, 0.018),
+			color: Math.random() > 0.35 ? GOLD : PURPLE
+		};
+	}
+
+	function init() {
+		const N = Math.min(90, Math.floor(W * H / 14000));
+		particles = Array.from({ length: N }, mkParticle);
+	}
+
+	function draw(ts) {
+		// dark background fill (replaces clearRect so we keep the canvas opaque)
+		ctx.fillStyle = '#07070f';
+		ctx.fillRect(0, 0, W, H);
+
+		// faint radial glow in center
+		const grd = ctx.createRadialGradient(W / 2, H / 2, 0, W / 2, H / 2, W * 0.55);
+		grd.addColorStop(0, 'rgba(90,30,160,0.08)');
+		grd.addColorStop(1, 'rgba(0,0,0,0)');
+		ctx.fillStyle = grd;
+		ctx.fillRect(0, 0, W, H);
+
+		const MAX_D = 160;
+
+		// connections
+		for (let i = 0; i < particles.length; i++) {
+			const a = particles[i];
+			for (let j = i + 1; j < particles.length; j++) {
+				const b = particles[j];
+				const dx = a.x - b.x, dy = a.y - b.y;
+				const dist = Math.sqrt(dx * dx + dy * dy);
+				if (dist > MAX_D) continue;
+				const alpha = (1 - dist / MAX_D) * 0.65;
+				// blend colors of the two endpoints
+				const r = (a.color[0] + b.color[0]) >> 1;
+				const g = (a.color[1] + b.color[1]) >> 1;
+				const bl = (a.color[2] + b.color[2]) >> 1;
+				ctx.beginPath();
+				ctx.moveTo(a.x, a.y);
+				ctx.lineTo(b.x, b.y);
+				ctx.strokeStyle = `rgba(${r},${g},${bl},${alpha})`;
+				ctx.lineWidth = 1.2;
+				ctx.stroke();
+			}
+		}
+
+		// nodes
+		for (const p of particles) {
+			p.phase += p.speed;
+			const pulse = 0.4 + 0.6 * Math.abs(Math.sin(p.phase));
+			ctx.beginPath();
+			ctx.arc(p.x, p.y, p.r * pulse, 0, Math.PI * 2);
+			ctx.fillStyle = `rgba(${p.color[0]},${p.color[1]},${p.color[2]},1)`;
+			ctx.fill();
+
+			// glow
+			const gl = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 6);
+			gl.addColorStop(0, `rgba(${p.color[0]},${p.color[1]},${p.color[2]},${0.4 * pulse})`);
+			gl.addColorStop(1, 'rgba(0,0,0,0)');
+			ctx.beginPath();
+			ctx.arc(p.x, p.y, p.r * 4, 0, Math.PI * 2);
+			ctx.fillStyle = gl;
+			ctx.fill();
+
+			// move & bounce
+			p.x += p.vx; p.y += p.vy;
+			if (p.x < 0 || p.x > W) p.vx *= -1;
+			if (p.y < 0 || p.y > H) p.vy *= -1;
+		}
+
+		requestAnimationFrame(draw);
+	}
+
+	resize();
+	init();
+	requestAnimationFrame(draw);
+	window.addEventListener('resize', () => { resize(); init(); });
+})();
+// ────────────────────────────────────────────────────────────────────────────
+
 function toggleLang() {
 	const body = document.body;
 	if (body.classList.contains('lang-en')) {
