@@ -3,323 +3,548 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Roadmap</title>
+    <link rel="shortcut icon" href="favicon.ico" />
+    <title>Roadmap — MushroomDAO</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background-color: #f8f9fa;
-            color: #212529;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #0d0d14;
+            color: #e8e8f0;
             line-height: 1.6;
-            margin: 0;
-            padding: 2rem;
-            display: flex;
-            justify-content: center;
+            padding: 0;
         }
 
-       .container {
-            max-width: 800px;
-            width: 100%;
-        }
-
-       .lang-switcher {
-            text-align: right;
-            margin-bottom: 2rem;
-        }
-
-       .lang-switcher button {
-            background: none;
-            border: none;
-            color: #6c757d;
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: 600;
-            padding: 0.5rem;
-            margin-left: 0.5rem;
-        }
-
-       .lang-switcher button.active {
-            color: #007bff;
-            border-bottom: 2px solid #007bff;
-        }
-
-        h2 {
-            font-size: 2rem;
-            font-weight: 700;
-            border-bottom: 1px solid #dee2e6;
-            padding-bottom: 0.5rem;
-            margin-bottom: 1rem;
-        }
-
-        p.intro {
-            font-size: 1.1rem;
-            color: #495057;
-            margin-bottom: 3rem;
-        }
-
-       .phase {
-            margin-bottom: 3rem;
-            padding-left: 1.5rem;
-            border-left: 3px solid #e9ecef;
-        }
-
-       .phase-header {
+        /* Nav */
+        nav {
             display: flex;
             justify-content: space-between;
-            align-items: baseline;
-            margin-bottom: 1rem;
+            align-items: center;
+            padding: 16px 40px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            background: rgba(13,13,20,0.95);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: #fff;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+        .nav-brand img { width: 28px; height: auto; }
+        .nav-links { display: flex; gap: 20px; align-items: center; }
+        .nav-links a {
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: #cf9818; }
+        .nav-links .btn-docs {
+            background: rgba(207,152,24,0.15);
+            border: 1px solid rgba(207,152,24,0.4);
+            color: #cf9818;
+            padding: 6px 14px;
+            border-radius: 16px;
+            font-size: 0.8rem;
+        }
+        .nav-links .btn-docs:hover { background: #cf9818; color: #000; }
+        .lang-toggle {
+            cursor: pointer;
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.5);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 5px 10px;
+            border-radius: 12px;
+            background: none;
+        }
+        .lang-toggle:hover { border-color: #cf9818; color: #cf9818; }
 
-       .phase h3 {
-            font-size: 1.5rem;
+        /* Page header */
+        .page-header {
+            text-align: center;
+            padding: 60px 24px 40px;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .page-header h1 {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
             font-weight: 700;
-            margin: 0;
+            margin-bottom: 12px;
+        }
+        .page-header h1 span { color: #cf9818; }
+        .page-header p {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.55);
+            max-width: 560px;
+            margin: 0 auto;
         }
 
-       .phase code {
-            font-family: "SF Mono", "Fira Code", "Fira Mono", "Roboto Mono", monospace;
-            background-color: #e9ecef;
-            color: #495057;
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
+        /* Container */
+        .container {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 48px 24px 80px;
+        }
+
+        /* Vision block */
+        .vision-block {
+            background: rgba(207,152,24,0.06);
+            border: 1px solid rgba(207,152,24,0.2);
+            border-radius: 12px;
+            padding: 24px 28px;
+            margin-bottom: 48px;
+        }
+        .vision-block .vision-label {
+            font-size: 0.72rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #cf9818;
+            margin-bottom: 10px;
+        }
+        .vision-block p {
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.75);
+            line-height: 1.7;
+        }
+
+        /* Phase */
+        .phase {
+            margin-bottom: 48px;
+        }
+        .phase-header {
+            display: flex;
+            align-items: baseline;
+            gap: 16px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .phase-icon {
+            font-size: 1.5rem;
+        }
+        .phase-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+        .phase-badge {
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.5);
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.12);
+            padding: 3px 10px;
+            border-radius: 10px;
+        }
+        .phase-badge.active {
+            color: #cf9818;
+            border-color: rgba(207,152,24,0.3);
+            background: rgba(207,152,24,0.08);
+        }
+        .phase-focus {
+            font-size: 0.82rem;
+            color: rgba(255,255,255,0.45);
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        /* Deliverables grid */
+        .deliverables {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+            gap: 12px;
+        }
+        .deliverable {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 10px;
+            padding: 14px 16px;
+            transition: border-color 0.2s;
+        }
+        .deliverable:hover { border-color: rgba(207,152,24,0.3); }
+        .deliverable-name {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #e8e8f0;
+            margin-bottom: 4px;
+        }
+        .deliverable-desc {
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.45);
+            line-height: 1.5;
+        }
+
+        /* Separator */
+        .phase-divider {
+            border: none;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            margin: 48px 0;
+        }
+
+        /* Coordinate systems */
+        .coord-section {
+            margin-bottom: 48px;
+        }
+        .coord-section h2 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #cf9818;
+            margin-bottom: 6px;
+        }
+        .coord-section .coord-intro {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 24px;
+        }
+        .coord-grids {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        @media (max-width: 640px) {
+            .coord-grids { grid-template-columns: 1fr; }
+        }
+        .coord-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 20px;
+        }
+        .coord-card h3 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 14px;
+        }
+        .coord-card pre {
+            font-family: "SF Mono", "Fira Code", "Fira Mono", monospace;
+            font-size: 0.72rem;
+            color: #cf9818;
+            line-height: 1.6;
+            white-space: pre;
+            overflow-x: auto;
+        }
+        .coord-caption {
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.4);
+            margin-top: 12px;
+            line-height: 1.5;
+        }
+
+        /* GToken curve */
+        .gtoken-note {
+            background: rgba(207,152,24,0.05);
+            border: 1px solid rgba(207,152,24,0.15);
+            border-radius: 10px;
+            padding: 16px 20px;
+            margin-top: 20px;
+            font-size: 0.82rem;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.7;
+        }
+        .gtoken-note strong { color: #cf9818; }
+
+        /* CTA */
+        .cta-row {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin-top: 48px;
+            justify-content: center;
+        }
+        .btn-primary {
+            background: #cf9818;
+            color: #000;
+            padding: 11px 26px;
+            border-radius: 22px;
+            text-decoration: none;
+            font-weight: 600;
             font-size: 0.9rem;
+            transition: opacity 0.2s;
         }
+        .btn-primary:hover { opacity: 0.85; }
+        .btn-secondary {
+            border: 1px solid rgba(255,255,255,0.3);
+            color: rgba(255,255,255,0.8);
+            padding: 11px 26px;
+            border-radius: 22px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: border-color 0.2s;
+        }
+        .btn-secondary:hover { border-color: #cf9818; color: #cf9818; }
 
-       .phase p {
-            margin: 0.5rem 0;
-            color: #343a40;
-        }
+        /* Lang toggle */
+        [data-lang] { display: none; }
+        body.lang-en [data-lang="en"] { display: block; }
+        body.lang-zh [data-lang="zh"] { display: block; }
+        body.lang-en .en-inline { display: inline; }
+        body.lang-zh .zh-inline { display: inline; }
+        .en-inline, .zh-inline { display: none; }
 
-       .phase.logic {
-            background-color: #f1f3f5;
-            border: 1px solid #dee2e6;
-            padding: 1rem;
-            border-radius: 6px;
-            margin-top: 1rem;
+        /* Responsive */
+        @media (max-width: 600px) {
+            nav { padding: 14px 20px; }
+            .nav-links a:not(.btn-docs):not(.lang-toggle) { display: none; }
         }
-
-       .phase.logic p {
-            margin: 0;
-        }
-        
-       .phase.logic strong {
-            color: #0056b3;
-        }
-
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
-    <script>
-        mermaid.initialize({ 
-            startOnLoad: true,
-            theme: 'default',
-            themeVariables: {
-                fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
-            }
-        });
-    </script>
 </head>
-<body>
+<body class="lang-en">
 
-<div class="container">
-    <div class="lang-switcher">
-        <button id="lang-en" class="active" onclick="switchLang('en')">English</button>
-        <button id="lang-zh" onclick="switchLang('zh')">中文</button>
+<nav>
+    <a class="nav-brand" href="/">
+        <img src="logo.png" alt="MushroomDAO">
+        <span>MushroomDAO</span>
+    </a>
+    <div class="nav-links">
+        <a href="/">
+            <span class="en-inline">Home</span>
+            <span class="zh-inline">首页</span>
+        </a>
+        <a href="https://www.mushroom.cv/" target="_blank">
+            <span class="en-inline">Live Kanban ↗</span>
+            <span class="zh-inline">实时看板 ↗</span>
+        </a>
+        <a href="/docs/#/" class="btn-docs">
+            <span class="en-inline">Docs</span>
+            <span class="zh-inline">文档</span>
+        </a>
+        <button class="lang-toggle" onclick="toggleLang()">EN / 中</button>
     </div>
+</nav>
 
-    <div id="en" class="content">
-        <h2>Project Roadmap: A Four-Step Validation Plan</h2>
-        <p class="intro">Our goal is to systematically de-risk our venture by validating technology, feasibility, legitimacy, and commercial viability in sequential phases. Each step builds upon the last, ensuring a solid foundation before scaling.</p>
-
-        <div class="phase">
-            <div class="phase-header">
-                <h3>Phase 1: Prototype Validation</h3>
-                <code>Timeline: 2025-2026</code>
-            </div>
-            <p><strong>🎯 Goal:</strong> To prove, at minimal cost, that we can build a technically sound and desirable product.</p>
-            <p><strong>✅ Key Outputs & Metrics:</strong> An interactive mobile demo, a technical whitepaper, and approval from technical advisors.</p>
-            <div class="logic">
-                <p><strong>🧠 Strategic Logic:</strong> This is the foundation. Before engaging external partners, we must have tangible assets that prove our technical competence. This phase answers the question: <strong>"Can we build it?"</strong> The outputs are the essential tools needed to start conversations in Phase 2.</p>
-            </div>
-        </div>
-
-        <div class="phase">
-            <div class="phase-header">
-                <h3>Phase 1.1: Micro-circulation Model (Parallel Path)</h3>
-                <code>Timeline: 2025-2026</code>
-            </div>
-            <p><strong>🎯 Goal:</strong> Build a self-sustaining micro-economy from the bottom-up as a risk hedge against institutional resistance.</p>
-            <p><strong>✅ Key Outputs & Metrics:</strong> 3-10 merchant micro-loop with zero-friction onboarding, AI content + Web3 incentives, measurable circulation velocity.</p>
-            <div class="logic">
-                <p><strong>🧠 Strategic Logic:</strong> This parallel path assumes potential failure of institutional partnerships. By proving micro-economic viability with small merchants through CPS payments + AI content + Web3 gamification, we create an alternative sustainable model via open-source protocols. This answers: <strong>"Can we succeed without institutions?"</strong></p>
-            </div>
-            
-            <div style="background: #f8f9fa; padding: 1rem; border-radius: 6px; margin-top: 1rem;">
-                <h4 style="margin: 0 0 0.5rem 0; color: #495057;">Micro-circulation Flow</h4>
-                <div class="mermaid">
-graph TD
-    A["3-10 Small Merchants<br/>Zero Learning Cost"] --> B["AI Content + Recommendation"]
-    B --> C["Web3 Gamified Incentives"]
-    C --> D["CPS Payment Loop"]
-    D --> E["Open Source Protocol<br/>Sustainable Operation"]
-    E --> F["Iterative Product Development"]
-    F --> A
-    
-    style A fill:#f3e5f5
-    style E fill:#e8f5e8
-                </div>
-            </div>
-        </div>
-
-        <div class="phase">
-            <div class="phase-header">
-                <h3>Phase 2: Feasibility Validation</h3>
-                <code>Timeline: 2026-2027</code>
-            </div>
-            <p><strong>🎯 Goal:</strong> To prove the model works in a controlled, real-world environment and gain our first credible local endorsement.</p>
-            <p><strong>✅ Key Outputs & Metrics:</strong> A <em>CMU Sandbox Test Report</em> (with metrics like >99.5% transaction success, >50 NPS) and a signed Memorandum of Understanding (MOU) with Chiang Mai University.</p>
-            <div class="logic">
-                <p><strong>🧠 Strategic Logic:</strong> This moves our project from a concept to a proven solution in a "lab" environment. The data provides evidence, while the CMU partnership provides critical local credibility. This answers the question: <strong>"Does it work here?"</strong> This credibility is non-negotiable for successfully approaching the conservative financial institutions in Phase 3.</p>
-            </div>
-        </div>
-
-        <div class="phase">
-            <div class="phase-header">
-                <h3>Phase 3: Legitimacy Validation</h3>
-                <code>Timeline: 2026-2027</code>
-            </div>
-            <p><strong>🎯 Goal:</strong> To secure the official regulatory and commercial "licenses to operate" from key ecosystem players.</p>
-            <p><strong>✅ Key Outputs & Metrics:</strong> An approval letter for the Bank of Thailand (BOT) "Regulatory Sandbox" and a signed commercial partnership agreement with a leading bank (e.g., SCB).</p>
-            <div class="logic">
-                <p><strong>🧠 Strategic Logic:</strong> This is the most critical de-risking phase. Without regulatory approval and a banking partner, we cannot legally operate. The success of Phase 2 is the key that unlocks these high-stakes negotiations. This phase answers the question: <strong>"Is it legal and supported?"</strong></p>
-            </div>
-        </div>
-
-        <div class="phase">
-            <div class="phase-header">
-                <h3>Phase 4: Commercial Validation</h3>
-                <code>Timeline: 2027-2028</code>
-            </div>
-            <p><strong>🎯 Goal:</strong> To prove product-market fit and demonstrate a profitable, sustainable business model with real users.</p>
-            <p><strong>✅ Key Outputs & Metrics:</strong> Acquisition of the first 1,000 active users, first transaction revenue, and a data-backed model proving LTV > CAC (target ratio > 3:1).</p>
-            <div class="logic">
-                <p><strong>🧠 Strategic Logic:</strong> With legal and technical hurdles cleared, this final step proves the business makes financial sense. It confirms that real users want our product and that we can acquire them profitably. This answers the ultimate question: <strong>"Is this a real business?"</strong> Success here provides the definitive green light for expansion.</p>
-            </div>
-        </div>
-    </div>
-
-    <div id="zh" class="content" style="display:none;">
-        <h2>项目路线图：四步验证计划</h2>
-        <p class="intro">我们的目标是通过分阶段验证技术、可行性、合法性和商业模式，系统性地消除项目风险。每一步都建立在上一阶段成功的基础之上，确保在扩张前拥有坚实的基础。</p>
-
-        <div class="phase">
-            <div class="phase-header">
-                <h3>第一阶段：原型验证</h3>
-                <code>时间线：2025-2026</code>
-            </div>
-            <p><strong>🎯 目标：</strong> 以最低成本证明我们有能力打造出一款技术可靠且用户体验卓越的产品。</p>
-            <p><strong>✅ 关键产出与衡量标准：</strong> 一个可交互的移动端 Demo，一份技术白皮书，并获得技术顾问认可。</p>
-            <div class="logic">
-                <p><strong>🧠 关键逻辑：</strong> 这是根基。在与外部伙伴接洽前，我们必须拥有能证明自身技术实力、清晰阐述愿景的有形资产。此阶段回答核心问题：<strong>“我们能做出来吗？”</strong> 其产出是开启第二阶段对话的必备工具。</p>
-            </div>
-        </div>
-
-        <div class="phase">
-            <div class="phase-header">
-                <h3>第 1.1 阶段：微循环模型（并行路径）</h3>
-                <code>时间线：2025-2026</code>
-            </div>
-            <p><strong>🎯 目标：</strong> 自底向上构建自维持微观经济生态，作为机构合作阻力的风险对冲策略。</p>
-            <p><strong>✅ 关键产出与衡量标准：</strong> 3-10 家商户微循环，零认知成本接入，AI 内容+Web3 激励，可量化的循环流速。</p>
-            <div class="logic">
-                <p><strong>🧠 关键逻辑：</strong> 此并行路径假设机构合作可能受阻。通过 CPS 支付+AI 内容+Web3 游戏化激励，在小商户中验证微观经济可行性，以开源协议构建替代可持续模式。此阶段回答核心问题：<strong>"脱离机构我们能成功吗？"</strong></p>
-            </div>
-            
-            <div style="background: #f8f9fa; padding: 1rem; border-radius: 6px; margin-top: 1rem;">
-                <h4 style="margin: 0 0 0.5rem 0; color: #495057;">微循环流程</h4>
-                <div class="mermaid">
-graph TD
-    A["3-10 家小商户<br/>零学习成本"] --> B["AI 内容 + 推荐"]
-    B --> C["Web3 游戏化激励"]
-    C --> D["CPS 支付循环"]
-    D --> E["开源协议<br/>可持续运营"]
-    E --> F["产品迭代优化"]
-    F --> A
-    
-    style A fill:#f3e5f5
-    style E fill:#e8f5e8
-                </div>
-            </div>
-        </div>
-
-        <div class="phase">
-            <div class="phase-header">
-                <h3>第二阶段：可行性验证</h3>
-                <code>时间线：2026-2027</code>
-            </div>
-            <p><strong>🎯 目标：</strong> 证明我们的模式能在受控的真实环境中运行，并获得第一个来自本地权威机构的认可。</p>
-            <p><strong>✅ 关键产出与衡量标准：</strong> 一份《清迈大学沙盒测试报告》（指标如 >99.5% 交易成功率，>50 净推荐值），以及一份与清迈大学（CMU）正式签署的合作备忘录（MOU）。</p>
-            <div class="logic">
-                <p><strong>🧠 关键逻辑：</strong> 此步骤将项目从“概念”推向在“实验室”环境中被验证的解决方案。数据报告提供了具体的性能证据，而与清迈大学的合作则给予了至关重要的本地信誉背书。此阶段回答核心问题：<strong>“这个模式在这里行得通吗？”</strong> 这份信誉背书是第三阶段与保守的金融机构成功对话的先决条件。</p>
-            </div>
-        </div>
-
-        <div class="phase">
-            <div class="phase-header">
-                <h3>第三阶段：合法性验证</h3>
-                <code>时间线：2026-2027</code>
-            </div>
-            <p><strong>🎯 目标：</strong> 从核心生态伙伴处，获得正式的监管与商业“运营许可”。</p>
-            <p><strong>✅ 关键产出与衡量标准：</strong> 一份来自泰国银行（BOT）的“监管沙盒”批准函，以及一份与领先银行（如 SCB）签署的商业合作协议。</p>
-            <div class="logic">
-                <p><strong>🧠 关键逻辑：</strong> 这是整个计划中最为关键的风险消除阶段。没有监管批准和银行合作伙伴，项目无法合法运营或扩张。第二阶段的成功是开启这些高风险谈判的钥匙。此阶段回答核心问题：<strong>“它合法且被支持吗？”</strong></p>
-            </div>
-        </div>
-
-        <div class="phase">
-            <div class="phase-header">
-                <h3>第四阶段：商业化验证</h3>
-                <code>时间线：2027-2028</code>
-            </div>
-            <p><strong>🎯 目标：</strong> 证明产品与市场的契合度，并用真实用户数据验证一个可盈利、可持续的商业模式。</p>
-            <p><strong>✅ 关键产出与衡量标准：</strong> 获取首批 1000 名活跃用户，产生第一笔交易收入，并建立一个证明 LTV > CAC 的数据模型（目标比率 > 3:1）。</p>
-            <div class="logic">
-                <p><strong>🧠 关键逻辑：</strong> 在扫清了法律和技术障碍后，这最后的验证步骤将证明我们的商业模式在财务上是成立的。它确认了真实用户需要我们的产品，并且我们可以通过盈利的方式获取他们。此阶段回答终极问题：<strong>“这是一门真正的生意吗？”</strong> 成功完成此阶段，将为项目全面扩张提供最终的绿灯。</p>
-            </div>
-        </div>
-    </div>
+<div class="page-header">
+    <h1 data-lang="en">Roadmap <span>2026–2027</span></h1>
+    <h1 data-lang="zh">路线图 <span>2026–2027</span></h1>
+    <p data-lang="en">Three phases from genesis launch to a thriving ecosystem — building the infrastructure for the next economy.</p>
+    <p data-lang="zh">从创世启动到生态成熟，三个阶段构建下一代经济的基础设施。</p>
 </div>
 
-    <script>
-        function switchLang(lang) {
-            const enContent = document.getElementById('en');
-            const zhContent = document.getElementById('zh');
-            const enButton = document.getElementById('lang-en');
-            const zhButton = document.getElementById('lang-zh');
+<div class="container">
 
-            if (lang === 'en') {
-                enContent.style.display = 'block';
-                zhContent.style.display = 'none';
-                enButton.classList.add('active');
-                zhButton.classList.remove('active');
-            } else {
-                enContent.style.display = 'none';
-                zhContent.style.display = 'block';
-                enButton.classList.remove('active');
-                zhButton.classList.add('active');
-                
-                // Re-render mermaid diagrams for Chinese version
-                setTimeout(function() {
-                    mermaid.init(undefined, document.querySelectorAll('#zh .mermaid'));
-                }, 100);
-            }
-        }
-        
-        // Initialize mermaid diagrams after page load
-        document.addEventListener('DOMContentLoaded', function() {
-            mermaid.init(undefined, document.querySelectorAll('.mermaid'));
-        });
-    </script>
+    <!-- Vision -->
+    <div class="vision-block">
+        <div class="vision-label">Vision / 愿景</div>
+        <p data-lang="en">We believe the future will be defined by <strong>Loose Communities</strong> and <strong>Extreme Individuals</strong>. Communities need onboarding + positive feedback + accountability (COS72). Individuals need time, space, and economic sustainability to release their imagination, creativity, and emotions.</p>
+        <p data-lang="zh">我们相信，未来的组织形态是<strong>松散社区与极致个体</strong>。社区最需要：Onboarding + 正反馈激励 + Check = <strong>COS72</strong>。个体需要：时间、空间、经济可持续，释放自己的想象力、创造力和情感。</p>
+    </div>
 
+    <!-- Phase 1 -->
+    <div class="phase">
+        <div class="phase-header">
+            <span class="phase-icon">🌱</span>
+            <div>
+                <div class="phase-title" data-lang="en">Phase 1 — Genesis Launch</div>
+                <div class="phase-title" data-lang="zh">第一阶段 — 创世启动</div>
+            </div>
+            <span class="phase-badge active">
+                <span class="en-inline">2026.03.30 · Active</span>
+                <span class="zh-inline">2026.03.30 · 进行中</span>
+            </span>
+        </div>
+        <p class="phase-focus" data-lang="en">Focus: Cold Start &amp; Core Infrastructure</p>
+        <p class="phase-focus" data-lang="zh">重点：冷启动与核心基础设施</p>
+        <div class="deliverables">
+            <div class="deliverable">
+                <div class="deliverable-name">Cos72 Chrome Extension</div>
+                <div class="deliverable-desc" data-lang="en">User gateway — integrates payments and smart accounts in one browser extension.</div>
+                <div class="deliverable-desc" data-lang="zh">用户入口，在浏览器插件中集成支付与智能账户。</div>
+            </div>
+            <div class="deliverable">
+                <div class="deliverable-name">SuperPaymaster</div>
+                <div class="deliverable-desc" data-lang="en">Decentralized Gas Payment Protocol. Let merchants sponsor users. No ETH required.</div>
+                <div class="deliverable-desc" data-lang="zh">去中心化 Gas 支付协议。让商户为用户支付 Gas，用户无需持有 ETH。</div>
+            </div>
+            <div class="deliverable">
+                <div class="deliverable-name">AirAccount</div>
+                <div class="deliverable-desc" data-lang="en">Social login → smart contract account. No seed phrases, no friction.</div>
+                <div class="deliverable-desc" data-lang="zh">社交登录 → 智能合约账户。无助记词，零门槛。</div>
+            </div>
+            <div class="deliverable">
+                <div class="deliverable-name">Sign90</div>
+                <div class="deliverable-desc" data-lang="en">Aggregate signature security — smart account core with guardian recovery and session keys.</div>
+                <div class="deliverable-desc" data-lang="zh">聚合签名安全模块，智能账户核心，支持 Guardian 恢复与 Session Key。</div>
+            </div>
+            <div class="deliverable">
+                <div class="deliverable-name">iDoris — Community Brain</div>
+                <div class="deliverable-desc" data-lang="en">Community intelligence layer — content value circulation, attribution, and collaborative decision-making.</div>
+                <div class="deliverable-desc" data-lang="zh">社区大脑——内容价值流通、归属确权与协作决策层。</div>
+            </div>
+            <div class="deliverable">
+                <div class="deliverable-name">MushroomDAO GToken</div>
+                <div class="deliverable-desc" data-lang="en">Cold launch of GToken (21M fixed supply). Initial governance vote goes live.</div>
+                <div class="deliverable-desc" data-lang="zh">GToken 冷启动（2100 万恒定供应），首次治理投票上线。</div>
+            </div>
+        </div>
+    </div>
+
+    <hr class="phase-divider">
+
+    <!-- Phase 2 -->
+    <div class="phase">
+        <div class="phase-header">
+            <span class="phase-icon">🍄</span>
+            <div>
+                <div class="phase-title" data-lang="en">Phase 2 — Community Expansion</div>
+                <div class="phase-title" data-lang="zh">第二阶段 — 社区扩展</div>
+            </div>
+            <span class="phase-badge">
+                <span class="en-inline">2026 H2</span>
+                <span class="zh-inline">2026 下半年</span>
+            </span>
+        </div>
+        <p class="phase-focus" data-lang="en">Focus: Collaborative Networks &amp; Hardware Solutions</p>
+        <p class="phase-focus" data-lang="zh">重点：协作网络与软硬件解决方案</p>
+        <div class="deliverables">
+            <div class="deliverable">
+                <div class="deliverable-name">Cos72 Community OS</div>
+                <div class="deliverable-desc" data-lang="en">MyTask, MyShop, MyVote — full-stack community tooling for DAOs and local groups.</div>
+                <div class="deliverable-desc" data-lang="zh">MyTask、MyShop、MyVote 模块上线，DAO 与本地社区全栈工具。</div>
+            </div>
+            <div class="deliverable">
+                <div class="deliverable-name">xPNTs / MySBT</div>
+                <div class="deliverable-desc" data-lang="en">Reputation and identity protocols refined — cross-community point rails.</div>
+                <div class="deliverable-desc" data-lang="zh">积分与身份协议完善，跨社区积分互通。</div>
+            </div>
+            <div class="deliverable">
+                <div class="deliverable-name">AirAccount Hardware</div>
+                <div class="deliverable-desc" data-lang="en">Edge Computing KMS — hardware security module for overseas and domestic markets.</div>
+                <div class="deliverable-desc" data-lang="zh">边缘计算 KMS 硬件安全模块，覆盖海外与国内市场。</div>
+            </div>
+            <div class="deliverable">
+                <div class="deliverable-name">OpenNest</div>
+                <div class="deliverable-desc" data-lang="en">Incubating Zu.Coffee, HHH, and Arcadia — protocol-native business applications.</div>
+                <div class="deliverable-desc" data-lang="zh">孵化 Zu.Coffee、HHH、Arcadia 等协议原生商业应用。</div>
+            </div>
+        </div>
+    </div>
+
+    <hr class="phase-divider">
+
+    <!-- Phase 3 -->
+    <div class="phase">
+        <div class="phase-header">
+            <span class="phase-icon">🌳</span>
+            <div>
+                <div class="phase-title" data-lang="en">Phase 3 — Ecosystem Maturity</div>
+                <div class="phase-title" data-lang="zh">第三阶段 — 生态成熟</div>
+            </div>
+            <span class="phase-badge">
+                <span class="en-inline">2027+</span>
+                <span class="zh-inline">2027+</span>
+            </span>
+        </div>
+        <p class="phase-focus" data-lang="en">Focus: Diversity, Sustainability &amp; Open Ecosystem</p>
+        <p class="phase-focus" data-lang="zh">重点：多样性、可持续发展与开放生态</p>
+        <div class="deliverables">
+            <div class="deliverable">
+                <div class="deliverable-name">Spores / Park Protocol</div>
+                <div class="deliverable-desc" data-lang="en">Viral growth protocol + Sustainable Public Goods — node incentives for network builders.</div>
+                <div class="deliverable-desc" data-lang="zh">病毒传播协议 + 可持续公共物品，网络建设者节点激励。</div>
+            </div>
+            <div class="deliverable">
+                <div class="deliverable-name">OpenCity</div>
+                <div class="deliverable-desc" data-lang="en">ChiangMai Connect pilot — local discovery protocol for digital nomads and residents.</div>
+                <div class="deliverable-desc" data-lang="zh">ChiangMai Connect 试点——面向数字游民和本地居民的信息发现协议。</div>
+            </div>
+            <div class="deliverable">
+                <div class="deliverable-name">TradeStar</div>
+                <div class="deliverable-desc" data-lang="en">Real trading training DApp — learn through real on-chain market participation.</div>
+                <div class="deliverable-desc" data-lang="zh">真实交易训练 DApp，通过链上真实市场参与学习。</div>
+            </div>
+            <div class="deliverable">
+                <div class="deliverable-name">CoinJar</div>
+                <div class="deliverable-desc" data-lang="en">Self-hosted piggy bank — personal savings and asset management, your keys, your coins.</div>
+                <div class="deliverable-desc" data-lang="zh">自托管存钱罐——个人储蓄与资产管理，你的密钥，你的资产。</div>
+            </div>
+        </div>
+    </div>
+
+    <hr class="phase-divider">
+
+    <!-- Two Coordinate Systems -->
+    <div class="coord-section">
+        <h2 data-lang="en">Two Value Coordinate Systems</h2>
+        <h2 data-lang="zh">两个价值坐标系</h2>
+        <p class="coord-intro" data-lang="en">The cold launch and GToken price curve are isomorphic to these two systems — every phase funded = a protocol value leap.</p>
+        <p class="coord-intro" data-lang="zh">冷启动与 GToken 价格曲线与这两个坐标系同构——每个阶段完成 = 协议价值跃升。</p>
+
+        <div class="coord-grids">
+            <div class="coord-card">
+                <h3 data-lang="en">System A — Problem × Action</h3>
+                <h3 data-lang="zh">坐标系 A — 问题 × 行动</h3>
+                <pre>Action Level
+    ↑
+    │                         ● Phase 5
+    │                   ●       Phase 4
+    │          ●                Phase 3
+    │    ●                      Phase 2
+    ●                           Phase 1 ✓
+    └─────────────────────────→
+         Problem / Value Dimension</pre>
+                <p class="coord-caption" data-lang="en">Each real-world problem solved drives one action leap, mapping to a protocol milestone and funding target.</p>
+                <p class="coord-caption" data-lang="zh">每解决一个真实问题，驱动一次行动跃升，映射到协议里程碑和融资目标。</p>
+            </div>
+            <div class="coord-card">
+                <h3 data-lang="en">System B — Output × Cost</h3>
+                <h3 data-lang="zh">坐标系 B — 产出 × 成本</h3>
+                <pre>Cost (USD)
+    ↑
+86,400│                         ● Phase 5
+      │
+33,600│                   ●      Phase 4
+      │
+ 8,000│          ●               Phase 3
+      │
+ 1,200│    ●                     Phase 2
+      └─────────────────────────→
+       Output (SDK/protocol/community)</pre>
+                <p class="coord-caption" data-lang="en">Cost grows non-linearly with output — marginal cost per unit decreases as infrastructure is amortized across more users.</p>
+                <p class="coord-caption" data-lang="zh">成本随产出非线性增长——随着基础设施被更多用户分摊，单位边际成本持续下降。</p>
+            </div>
+        </div>
+
+        <div class="gtoken-note">
+            <strong>GToken sales curve is isomorphic to both systems:</strong>
+            &nbsp; Each funding target = one action node in System A &nbsp;·&nbsp;
+            Funding received = cost covered in System B &nbsp;·&nbsp;
+            <strong>+12% price per phase</strong> = on-chain expression of protocol value increase.
+            Starting price: <strong>$0.15 / GT</strong> &nbsp;→&nbsp; 21M fixed supply &nbsp;→&nbsp; 80% DAO / 20% commercial company.
+        </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-row">
+        <a href="/docs/#/cold-launch-en" class="btn-primary">
+            <span class="en-inline">Join Cold Launch →</span>
+            <span class="zh-inline">加入冷启动 →</span>
+        </a>
+        <a href="https://www.mushroom.cv/" class="btn-secondary" target="_blank">
+            <span class="en-inline">Live Dev Progress ↗</span>
+            <span class="zh-inline">实时开发进度 ↗</span>
+        </a>
+        <a href="/docs/#/roadmap-en" class="btn-secondary">
+            <span class="en-inline">Roadmap in Docs</span>
+            <span class="zh-inline">文档版路线图</span>
+        </a>
+    </div>
+
+</div>
+
+<script>
+function toggleLang() {
+    const body = document.body;
+    if (body.classList.contains('lang-en')) {
+        body.classList.replace('lang-en', 'lang-zh');
+    } else {
+        body.classList.replace('lang-zh', 'lang-en');
+    }
+}
+</script>
 </body>
 </html>

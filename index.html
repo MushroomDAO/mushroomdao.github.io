@@ -1,79 +1,659 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="shortcut icon" href="favicon.ico" />
-	<title>Mycelium Protocol</title>
-	
+	<title>MushroomDAO — Mycelium Protocol</title>
+	<meta name="description" content="MushroomDAO builds decentralized infrastructure for the next economy — AirAccount, SuperPaymaster, and the Mycelium Protocol enabling zero-friction Web3 for everyone.">
+	<meta property="og:title" content="MushroomDAO — Mycelium Protocol">
+	<meta property="og:description" content="Zero-friction Web3 infrastructure for ordinary people. No private keys. No gas fees. Just digital freedom.">
+	<meta property="og:type" content="website">
+
 	<style>
+		* { box-sizing: border-box; margin: 0; padding: 0; }
+
 		body {
-			background-image: url('background.png'); 
+			background-image: url('background.png');
 			background-size: cover;
 			background-position: center;
 			background-repeat: no-repeat;
-			height: 100vh;
-			margin: 0;
+			min-height: 100vh;
+			font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+			color: #ffffff;
 		}
-		
-		.container {
-			position: absolute;
-			top: 50%;
-			left: 50%;
-			transform: translate(-50%, -50%);
+
+		/* Overlay for readability */
+		.overlay {
+			min-height: 100vh;
+			background: linear-gradient(135deg, rgba(0,0,0,0.65) 0%, rgba(20,10,40,0.55) 100%);
+			display: flex;
+			flex-direction: column;
+		}
+
+		/* Nav */
+		nav {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 20px 40px;
+			border-bottom: 1px solid rgba(255,255,255,0.1);
+		}
+		.nav-brand {
+			display: flex;
+			align-items: center;
+			gap: 12px;
+			text-decoration: none;
+			color: #fff;
+		}
+		.nav-brand img { width: 36px; height: auto; }
+		.nav-brand span { font-size: 1.1rem; font-weight: 600; }
+		.nav-links { display: flex; gap: 24px; align-items: center; }
+		.nav-links a {
+			color: rgba(255,255,255,0.8);
+			text-decoration: none;
+			font-size: 0.9rem;
+			transition: color 0.2s;
+		}
+		.nav-links a:hover { color: #cf9818; }
+		.nav-links .btn-docs {
+			background: rgba(207,152,24,0.2);
+			border: 1px solid #cf9818;
+			color: #cf9818;
+			padding: 7px 16px;
+			border-radius: 20px;
+			font-size: 0.85rem;
+		}
+		.nav-links .btn-docs:hover {
+			background: #cf9818;
+			color: #000;
+		}
+		.lang-toggle {
+			cursor: pointer;
+			font-size: 0.85rem;
+			color: rgba(255,255,255,0.6);
+			border: 1px solid rgba(255,255,255,0.3);
+			padding: 5px 10px;
+			border-radius: 12px;
+			background: none;
+			color: rgba(255,255,255,0.7);
+		}
+		.lang-toggle:hover { border-color: #cf9818; color: #cf9818; }
+
+		/* Hero */
+		.hero {
+			flex: 1;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
 			text-align: center;
-			color: #ffffff; 
-            
-            
+			padding: 60px 24px 40px;
 		}
+		.hero-logo { width: 80px; height: auto; margin-bottom: 20px; }
+		.hero-tagline {
+			font-size: 0.85rem;
+			letter-spacing: 3px;
+			text-transform: uppercase;
+			color: #cf9818;
+			margin-bottom: 16px;
+		}
+		.hero h1 {
+			font-size: clamp(2rem, 5vw, 3.5rem);
+			font-weight: 700;
+			line-height: 1.15;
+			margin-bottom: 20px;
+		}
+		.hero h1 span { color: #cf9818; }
+		.hero p {
+			font-size: clamp(0.95rem, 2vw, 1.15rem);
+			color: rgba(255,255,255,0.8);
+			max-width: 600px;
+			line-height: 1.7;
+			margin-bottom: 36px;
+		}
+		.hero-cta { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+		.btn-primary {
+			background: #cf9818;
+			color: #000;
+			padding: 12px 28px;
+			border-radius: 24px;
+			text-decoration: none;
+			font-weight: 600;
+			font-size: 0.95rem;
+			transition: opacity 0.2s;
+		}
+		.btn-primary:hover { opacity: 0.85; }
+		.btn-secondary {
+			border: 1px solid rgba(255,255,255,0.5);
+			color: #fff;
+			padding: 12px 28px;
+			border-radius: 24px;
+			text-decoration: none;
+			font-size: 0.95rem;
+			transition: border-color 0.2s;
+		}
+		.btn-secondary:hover { border-color: #cf9818; color: #cf9818; }
 
-		.logo {
-			width: 100px; 
-			height: auto;
-			margin: 0 10px; 
-			display: inline-block; 
-			vertical-align: middle; 
+		/* Pillars */
+		.pillars {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+			gap: 16px;
+			max-width: 900px;
+			margin: 48px auto 0;
+			padding: 0 24px;
+			width: 100%;
 		}
-		
-		.title {
-			display: inline-block; 
-			vertical-align: middle; 
-			margin: 0; 
-            font-size: 3rem;
+		.pillar {
+			background: rgba(255,255,255,0.06);
+			border: 1px solid rgba(255,255,255,0.12);
+			border-radius: 12px;
+			padding: 20px;
+			text-align: left;
+			transition: border-color 0.2s;
 		}
+		.pillar:hover { border-color: #cf9818; }
+		.pillar-icon { font-size: 1.6rem; margin-bottom: 10px; }
+		.pillar h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 6px; }
+		.pillar p { font-size: 0.8rem; color: rgba(255,255,255,0.6); line-height: 1.5; }
 
-		.links {
-			text-align: center; /* center the links */
+		/* Links row */
+		.links-row {
+			display: flex;
+			justify-content: center;
+			gap: 24px;
+			flex-wrap: wrap;
+			padding: 36px 24px 48px;
+			font-size: 0.85rem;
 		}
-		
-		.links {
-			position: absolute;
-			bottom: 100px;
-			left: 50%;
-			transform: translateX(-50%);
+		.links-row a {
+			color: rgba(255,255,255,0.6);
+			text-decoration: none;
+			transition: color 0.2s;
+		}
+		.links-row a:hover { color: #cf9818; }
+
+		/* Hidden content for ZH */
+		[data-lang] { display: none; }
+		.lang-en [data-lang="en"] { display: block; }
+		.lang-zh [data-lang="zh"] { display: block; }
+		body.lang-en .lang-en-inline { display: inline; }
+		body.lang-zh .lang-zh-inline { display: inline; }
+		.lang-en-inline, .lang-zh-inline { display: none; }
+
+		/* Commercial banner */
+		.commercial-banner {
+			margin-top: 20px;
+			font-size: 0.82rem;
+			color: rgba(255,255,255,0.55);
 			text-align: center;
-			font-size:x-large;
 		}
-		
-		.links a {
-			color: #ffffff; /* change the link color to white */
-			text-decoration: none; /* remove the underline from the links */
-			margin: 0 10px; /* add some margin between the links */
+		.commercial-banner a {
+			color: #cf9818;
+			text-decoration: none;
+		}
+		.commercial-banner a:hover { text-decoration: underline; }
+
+		/* Cold Launch section */
+		.cold-launch {
+			max-width: 860px;
+			margin: 0 auto;
+			padding: 0 24px 48px;
+		}
+		.cl-header {
+			font-size: 1rem;
+			font-weight: 700;
+			letter-spacing: 1px;
+			color: #cf9818;
+			margin-bottom: 8px;
+		}
+		.cl-desc {
+			font-size: 0.85rem;
+			color: rgba(255,255,255,0.65);
+			margin-bottom: 20px;
+		}
+		.tiers { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+		.tier {
+			display: flex;
+			align-items: center;
+			gap: 12px;
+			background: rgba(255,255,255,0.05);
+			border: 1px solid rgba(255,255,255,0.08);
+			border-radius: 10px;
+			padding: 12px 16px;
+		}
+		.tier.done { opacity: 0.5; }
+		.tier.active { border-color: #cf9818; background: rgba(207,152,24,0.08); }
+		.tier-badge {
+			font-size: 0.75rem;
+			color: rgba(255,255,255,0.5);
+			min-width: 42px;
+			text-align: center;
+		}
+		.tier.active .tier-badge { color: #cf9818; font-weight: 700; }
+		.tier-info { flex: 1; display: flex; justify-content: space-between; align-items: center; }
+		.tier-info strong { font-size: 0.82rem; }
+		.tier-price { font-size: 0.75rem; color: #cf9818; white-space: nowrap; margin-left: 12px; }
+		.tier-bar { width: 100%; height: 3px; background: rgba(255,255,255,0.1); border-radius: 2px; margin-top: 4px; }
+		.tier-fill { height: 100%; background: #cf9818; border-radius: 2px; transition: width 0.5s; }
+		.cl-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+		/* Docs Nav */
+		.docs-nav {
+			max-width: 860px;
+			margin: 0 auto 12px;
+			padding: 0 24px;
+		}
+		.docs-nav-label {
+			font-size: 0.72rem;
+			letter-spacing: 2px;
+			text-transform: uppercase;
+			color: rgba(255,255,255,0.35);
+			margin-bottom: 14px;
+			text-align: center;
+		}
+		.doc-cards {
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+			gap: 12px;
+		}
+		.doc-card {
+			background: rgba(255,255,255,0.04);
+			border: 1px solid rgba(255,255,255,0.08);
+			border-radius: 12px;
+			padding: 18px 20px;
+			display: flex;
+			flex-direction: column;
+			gap: 8px;
+			transition: border-color 0.2s;
+			text-decoration: none;
+		}
+		.doc-card:hover { border-color: rgba(207,152,24,0.4); }
+		.doc-card-icon { font-size: 1.3rem; }
+		.doc-card-title {
+			font-size: 0.9rem;
+			font-weight: 600;
+			color: #fff;
+		}
+		.doc-card-desc {
+			font-size: 0.75rem;
+			color: rgba(255,255,255,0.5);
+			line-height: 1.55;
+			flex: 1;
+		}
+		.doc-card-cta {
+			font-size: 0.75rem;
+			color: #cf9818;
+			margin-top: 4px;
 		}
 
-		.links a:hover {
-			color: #cf9818; /* change the link color to a light blue on hover */
-		}		
+		body.lang-en [data-lang="en"].doc-cards,
+		body.lang-zh [data-lang="zh"].doc-cards { display: grid; }
+
+		/* Progress strip */
+		.progress-strip {
+			max-width: 860px;
+			margin: 0 auto 32px;
+			padding: 0 24px;
+			display: flex;
+			align-items: center;
+			gap: 16px;
+			background: rgba(255,255,255,0.04);
+			border: 1px solid rgba(255,255,255,0.08);
+			border-radius: 10px;
+			padding: 12px 20px;
+			flex-wrap: wrap;
+		}
+		.strip-label {
+			font-size: 0.75rem;
+			color: #cf9818;
+			font-weight: 600;
+			white-space: nowrap;
+		}
+		.strip-tasks {
+			flex: 1;
+			display: flex;
+			gap: 8px;
+			overflow: hidden;
+			flex-wrap: wrap;
+		}
+		.task-chip {
+			font-size: 0.72rem;
+			padding: 3px 10px;
+			border-radius: 12px;
+			background: rgba(255,255,255,0.08);
+			color: rgba(255,255,255,0.7);
+			white-space: nowrap;
+		}
+		.task-chip.in-progress { border: 1px solid rgba(207,152,24,0.5); color: #cf9818; }
+		.task-loading { font-size: 0.72rem; color: rgba(255,255,255,0.3); }
+		.strip-link {
+			font-size: 0.75rem;
+			color: rgba(255,255,255,0.4);
+			text-decoration: none;
+			white-space: nowrap;
+			transition: color 0.2s;
+		}
+		.strip-link:hover { color: #cf9818; }
+
+		@media (max-width: 600px) {
+			nav { padding: 16px 20px; }
+			.nav-links a:not(.btn-docs):not(.lang-toggle) { display: none; }
+			.tier-info { flex-direction: column; align-items: flex-start; }
+		}
 	</style>
 </head>
-<body>
-	<div class="container">
-		<img src="logo.png" alt="Logo" class="logo"> 
-		<h1 class="title">Mycelium Protocol</h1>
-		<h1 class="title"><a href="./white-paper.html" target="_blank">Mushroom </a> is Coming!</h1>
+<body class="lang-en">
+<div class="overlay">
+
+	<nav>
+		<a class="nav-brand" href="/">
+			<img src="logo.png" alt="MushroomDAO logo">
+			<span>MushroomDAO</span>
+		</a>
+		<div class="nav-links">
+			<a href="Roadmap.html">
+				<span class="lang-en-inline">Roadmap</span>
+				<span class="lang-zh-inline">路线图</span>
+			</a>
+			<a href="/docs/#/" class="btn-docs">
+				<span class="lang-en-inline">Docs</span>
+				<span class="lang-zh-inline">文档</span>
+			</a>
+			<button class="lang-toggle" onclick="toggleLang()" title="Switch language">EN / 中</button>
+		</div>
+	</nav>
+
+	<section class="hero">
+		<img src="logo.png" alt="MushroomDAO" class="hero-logo">
+
+		<p class="hero-tagline">Mycelium Protocol</p>
+
+		<h1 data-lang="en">
+			Web3 for <span>Ordinary People</span><br>Not Just Developers
+		</h1>
+		<h1 data-lang="zh">
+			面向<span>普通人</span>的 Web3<br>而不只是开发者
+		</h1>
+
+		<p data-lang="en">
+			MushroomDAO builds open decentralized infrastructure — no private keys to lose, no gas fees to worry about.
+			Inspired by 4.5 billion years of fungal cooperation, we're rewiring how value flows.
+		</p>
+		<p data-lang="zh">
+			MushroomDAO 构建开放的去中心化基础设施——无需保管私钥，无需担心 Gas 费用。
+			灵感源自 45 亿年的菌丝协作，我们重新定义价值流动方式。
+		</p>
+
+		<div class="hero-cta">
+			<a href="/docs/#/whitepaper-en" class="btn-primary">
+				<span class="lang-en-inline">Read the Whitepaper</span>
+				<span class="lang-zh-inline">阅读白皮书</span>
+			</a>
+			<a href="Roadmap.html" class="btn-secondary">
+				<span class="lang-en-inline">View Roadmap</span>
+				<span class="lang-zh-inline">查看路线图</span>
+			</a>
+		</div>
+
+		<div class="pillars">
+			<div class="pillar">
+				<div class="pillar-icon">🪪</div>
+				<h3>AirAccount</h3>
+				<p data-lang="en">ERC-4337 smart accounts with Passkey + MFA. No seed phrases. Social recovery built in.</p>
+				<p data-lang="zh">基于 ERC-4337 的智能账户，支持 Passkey + MFA。无需助记词，内置社交恢复。</p>
+			</div>
+			<div class="pillar">
+				<div class="pillar-icon">⛽</div>
+				<h3>SuperPaymaster</h3>
+				<p data-lang="en">Decentralized gas sponsorship. Pay fees in any token — or let merchants sponsor your transactions.</p>
+				<p data-lang="zh">去中心化 Gas 赞助。用任意代币支付费用，或让商户为你的交易买单。</p>
+			</div>
+			<div class="pillar">
+				<div class="pillar-icon">🍄</div>
+				<h3>Mycelium Protocol</h3>
+				<p data-lang="en">Open cooperative protocol for communities. Points, identity, and governance — all permissionless.</p>
+				<p data-lang="zh">开放的社区协作协议，积分、身份与治理——全部无需许可。</p>
+			</div>
+			<div class="pillar">
+				<div class="pillar-icon">🌐</div>
+				<h3 data-lang="en">forest.mushroom.cv</h3>
+				<h3 data-lang="zh">forest.mushroom.cv</h3>
+				<p data-lang="en">Free one-click website for any merchant or community. Your data, your key — never locked in.</p>
+				<p data-lang="zh">免费一键建站，面向任意商户和社区。数据归你，私钥归你，永不锁定。</p>
+			</div>
+		</div>
+
+		<div class="commercial-banner">
+			<span data-lang="en">💼 Small business? <a href="/docs/#/services-en" target="_blank">See commercial services →</a> &nbsp;|&nbsp; Free website at <a href="https://forest.mushroom.cv" target="_blank">forest.mushroom.cv</a></span>
+			<span data-lang="zh">💼 小商户？<a href="/docs/#/services-zh" target="_blank">查看商业服务 →</a> &nbsp;|&nbsp; 免费建站：<a href="https://forest.mushroom.cv" target="_blank">forest.mushroom.cv</a></span>
+		</div>
+	</section>
+
+	<!-- Cold Launch Section -->
+	<section class="cold-launch" id="launch">
+		<div class="cl-header">
+			<span class="lang-en-inline">🚀 Cold Launch — Join the Protocol</span>
+			<span class="lang-zh-inline">🚀 冷启动 — 加入协议</span>
+		</div>
+		<p class="cl-desc" data-lang="en">Every phase funded = GToken price +12%. Support the protocol. Shape the future.</p>
+		<p class="cl-desc" data-lang="zh">每个阶段达成 = GToken 价格 +12%。支持协议，共塑未来。</p>
+
+		<div class="tiers" id="tierList">
+			<!-- Populated by JS -->
+			<div class="tier done">
+				<span class="tier-badge">✅</span>
+				<div class="tier-info">
+					<strong data-lang="en">Phase 1 — Voice Established</strong>
+					<strong data-lang="zh">阶段 1 — 声音建立</strong>
+					<span class="tier-price">Done</span>
+				</div>
+			</div>
+			<div class="tier active">
+				<span class="tier-badge">Tier 1</span>
+				<div class="tier-info">
+					<strong data-lang="en">Phase 2 — Powered by Love · $1,200</strong>
+					<strong data-lang="zh">阶段 2 — 用爱发电 · $1,200</strong>
+					<span class="tier-price">$0.15 / GT</span>
+				</div>
+				<div class="tier-bar"><div class="tier-fill" id="tier1fill" style="width:0%"></div></div>
+			</div>
+			<div class="tier upcoming">
+				<span class="tier-badge">Tier 2</span>
+				<div class="tier-info">
+					<strong data-lang="en">Phase 3 — CMUBRC Research · $8,000</strong>
+					<strong data-lang="zh">阶段 3 — CMUBRC 研究 · $8,000</strong>
+					<span class="tier-price">$0.168 / GT</span>
+				</div>
+			</div>
+			<div class="tier upcoming">
+				<span class="tier-badge">Tier 3</span>
+				<div class="tier-info">
+					<strong data-lang="en">Phase 4 — Protocol Community · $33,600</strong>
+					<strong data-lang="zh">阶段 4 — Protocol 社区 · $33,600</strong>
+					<span class="tier-price">$0.188 / GT</span>
+				</div>
+			</div>
+			<div class="tier upcoming">
+				<span class="tier-badge">Tier 4</span>
+				<div class="tier-info">
+					<strong data-lang="en">Phase 5 — AAStar Infrastructure · $86,400</strong>
+					<strong data-lang="zh">阶段 5 — AAStar 基础设施 · $86,400</strong>
+					<span class="tier-price">$0.211 / GT</span>
+				</div>
+			</div>
+		</div>
+
+		<div class="cl-actions">
+			<a href="/docs/#/cold-launch-en" class="btn-primary" data-lang="en">Read Launch Details</a>
+			<a href="/docs/#/cold-launch-zh" class="btn-primary" data-lang="zh">了解冷启动详情</a>
+			<a href="https://www.mushroom.cv/" class="btn-secondary" target="_blank">
+				<span class="lang-en-inline">Live Dev Progress ↗</span>
+				<span class="lang-zh-inline">实时开发进度 ↗</span>
+			</a>
+		</div>
+	</section>
+
+	<!-- Docs Navigation Cards -->
+	<section class="docs-nav">
+		<p class="docs-nav-label">
+			<span class="lang-en-inline">Explore the Protocol</span>
+			<span class="lang-zh-inline">探索协议生态</span>
+		</p>
+		<div class="doc-cards" data-lang="en">
+			<a class="doc-card" href="/docs/#/whitepaper-en">
+				<div class="doc-card-icon">📄</div>
+				<div class="doc-card-title">Whitepaper</div>
+				<div class="doc-card-desc">In-depth exploration of social problems and solutions — technical architecture, business models, and implementation paths for decentralized collaboration.</div>
+				<div class="doc-card-cta">View Lite Whitepaper →</div>
+			</a>
+			<a class="doc-card" href="/docs/#/roadmap-en">
+				<div class="doc-card-icon">🗺️</div>
+				<div class="doc-card-title">Roadmap</div>
+				<div class="doc-card-desc">Key development milestones and goal planning — from infrastructure construction to an open ecosystem. Phase 1 Genesis Launch active (2026.03.30).</div>
+				<div class="doc-card-cta">View Roadmap →</div>
+			</a>
+			<a class="doc-card" href="/docs/#/tokenomics-en">
+				<div class="doc-card-icon">🪙</div>
+				<div class="doc-card-title">Tokenomics</div>
+				<div class="doc-card-desc">Innovative token economic system — governance token GToken (21M fixed) and mPNTs under the OpenPNTs protocol. Any organization can issue their own loyalty tokens.</div>
+				<div class="doc-card-cta">Learn Tokenomics →</div>
+			</a>
+			<a class="doc-card" href="/docs/#/protocol-en">
+				<div class="doc-card-icon">🔗</div>
+				<div class="doc-card-title">Protocol</div>
+				<div class="doc-card-desc">Explore Mycelium Protocol resources and tools — developer docs, community resources, partner information, technical blogs, and ecosystem updates.</div>
+				<div class="doc-card-cta">Protocol Docs →</div>
+			</a>
+			<a class="doc-card" href="/docs/#/dao-en">
+				<div class="doc-card-icon">🏛️</div>
+				<div class="doc-card-title">DAO</div>
+				<div class="doc-card-desc">Architectural design and governance model of the decentralized autonomous organization — building collaborative, interoperable protocol systems for true community autonomy.</div>
+				<div class="doc-card-cta">Explore DAO →</div>
+			</a>
+			<a class="doc-card" href="/docs/#/demo-en">
+				<div class="doc-card-icon">🎮</div>
+				<div class="doc-card-title">Demo &amp; Products</div>
+				<div class="doc-card-desc">Practical application demos of the Mycelium Protocol — decentralized collaboration tools, governance voting, token economics in action, and live development progress.</div>
+				<div class="doc-card-cta">Try Demo →</div>
+			</a>
+		</div>
+
+		<div class="doc-cards" data-lang="zh">
+			<a class="doc-card" href="/docs/#/whitepaper-zh">
+				<div class="doc-card-icon">📄</div>
+				<div class="doc-card-title">白皮书</div>
+				<div class="doc-card-desc">深入探讨社会问题与解决方案，包括技术架构、商业模式和实施路径的综合研究。涵盖对去中心化协作和技术创新的深度思考。</div>
+				<div class="doc-card-cta">阅读精简版白皮书 →</div>
+			</a>
+			<a class="doc-card" href="/docs/#/roadmap-zh">
+				<div class="doc-card-icon">🗺️</div>
+				<div class="doc-card-title">路线图</div>
+				<div class="doc-card-desc">协议关键发展节点与目标规划——从基础设施建设到开放生态系统。Phase 1 创世启动进行中（2026.03.30）。</div>
+				<div class="doc-card-cta">查看路线图 →</div>
+			</a>
+			<a class="doc-card" href="/docs/#/tokenomics-zh">
+				<div class="doc-card-icon">🪙</div>
+				<div class="doc-card-title">代币经济学</div>
+				<div class="doc-card-desc">创新的代币经济系统——治理代币 GToken（2100万恒定供应）与 OpenPNTs 协议下的 mPNTs。支持任何组织和个人发行自己的积分代币。</div>
+				<div class="doc-card-cta">了解代币经济学 →</div>
+			</a>
+			<a class="doc-card" href="/docs/#/protocol-zh">
+				<div class="doc-card-icon">🔗</div>
+				<div class="doc-card-title">协议</div>
+				<div class="doc-card-desc">探索 Mycelium 协议的资源与工具——开发者文档、社区资源、合作伙伴信息、技术博客和生态系统最新动态。</div>
+				<div class="doc-card-cta">协议文档 →</div>
+			</a>
+			<a class="doc-card" href="/docs/#/dao-zh">
+				<div class="doc-card-icon">🏛️</div>
+				<div class="doc-card-title">DAO 组织</div>
+				<div class="doc-card-desc">去中心化自治组织的架构设计和治理模型——构建协作可互操作的协议系统，实现真正的社区自治和价值共创。</div>
+				<div class="doc-card-cta">探索 DAO →</div>
+			</a>
+			<a class="doc-card" href="/docs/#/demo-zh">
+				<div class="doc-card-icon">🎮</div>
+				<div class="doc-card-title">Demo 与产品</div>
+				<div class="doc-card-desc">体验 Mycelium 协议的实际应用演示——去中心化协作工具、治理投票系统和代币经济学互动展示，直观感受协议强大功能。</div>
+				<div class="doc-card-cta">体验 Demo →</div>
+			</a>
+		</div>
+	</section>
+
+	<!-- Live Progress Strip -->
+	<section class="progress-strip" id="progressStrip">
+		<div class="strip-label">
+			<span class="lang-en-inline">⚡ Live Build Progress</span>
+			<span class="lang-zh-inline">⚡ 实时开发进度</span>
+		</div>
+		<div class="strip-tasks" id="taskStrip">
+			<span class="task-loading">Loading from mushroom.cv...</span>
+		</div>
+		<a href="https://www.mushroom.cv/" target="_blank" class="strip-link">
+			<span class="lang-en-inline">View all tasks →</span>
+			<span class="lang-zh-inline">查看全部任务 →</span>
+		</a>
+	</section>
+
+	<div class="links-row">
+		<a href="https://docs.google.com/presentation/d/1hxwEK2gy9XI9J0WQkmXqwLx2-jzUyt-EU14B6TczgSU/edit#slide=id.p" target="_blank">
+			<span class="lang-en-inline">Nature Public Goods</span>
+			<span class="lang-zh-inline">自然公共物品</span>
+		</a>
+		<a href="https://docs.google.com/presentation/d/11Ig3LySW2-K1R44nEFzHJgqhLqPNsVI2ORo330YHUn4/edit#slide=id.p" target="_blank">
+			<span class="lang-en-inline">Spores Plan</span>
+			<span class="lang-zh-inline">孢子计划</span>
+		</a>
+		<a href="https://hackmd.io/@jhfnetboy/HJ4UoYJc0" target="_blank">
+			<span class="lang-en-inline">What is Mycelium Protocol</span>
+			<span class="lang-zh-inline">什么是菌丝协议</span>
+		</a>
+		<a href="https://github.com/mushroomdao" target="_blank">GitHub</a>
+		<a href="https://x.com/mushroomdao1984" target="_blank">Twitter / X</a>
+		<a href="https://t.me/aastarcommunity" target="_blank">Telegram</a>
 	</div>
-	<div class="links">
-		<a href="https://docs.google.com/presentation/d/1hxwEK2gy9XI9J0WQkmXqwLx2-jzUyt-EU14B6TczgSU/edit#slide=id.p" target="_blank">Nature Public Goods</a>
-		<a href="https://docs.google.com/presentation/d/11Ig3LySW2-K1R44nEFzHJgqhLqPNsVI2ORo330YHUn4/edit#slide=id.p" target="_blank">Spores Plan</a>
-		<a href="https://hackmd.io/@jhfnetboy/HJ4UoYJc0" target="_blank">What is Mycelium Protocol</a>
-	</div>	
+
+</div>
+
+<script>
+function toggleLang() {
+	const body = document.body;
+	if (body.classList.contains('lang-en')) {
+		body.classList.replace('lang-en', 'lang-zh');
+	} else {
+		body.classList.replace('lang-zh', 'lang-en');
+	}
+}
+document.addEventListener('keydown', e => {
+	if (e.altKey && e.key === 'l') toggleLang();
+});
+
+// Fetch live task progress from mushroom.cv
+async function loadProgress() {
+	try {
+		const res = await fetch('https://www.mushroom.cv/api/tasks.json', { mode: 'cors' });
+		if (!res.ok) throw new Error('fetch failed');
+		const data = await res.json();
+		const tasks = Array.isArray(data) ? data : (data.tasks || []);
+		const inProgress = tasks.filter(t => t.status === 'In Progress').slice(0, 6);
+		const done = tasks.filter(t => t.status === 'Done').length;
+		const total = tasks.length;
+
+		const strip = document.getElementById('taskStrip');
+		if (inProgress.length === 0) {
+			strip.innerHTML = `<span class="task-chip">All tasks on track · ${done}/${total} done</span>`;
+			return;
+		}
+		strip.innerHTML = inProgress.map(t =>
+			`<span class="task-chip in-progress" title="${t.title}">⚡ ${t.title.slice(0, 28)}${t.title.length > 28 ? '…' : ''}</span>`
+		).join('') + `<span class="task-chip">${done}/${total} done</span>`;
+	} catch (e) {
+		document.getElementById('taskStrip').innerHTML =
+			'<a href="https://www.mushroom.cv/" target="_blank" class="task-chip" style="text-decoration:none">View live progress at mushroom.cv →</a>';
+	}
+}
+
+loadProgress();
+</script>
 </body>
 </html>
